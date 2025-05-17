@@ -1,0 +1,46 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 1.8rem;
+}
+
+.center {
+  text-align: center;
+  flex: 1;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .center {
+    width: 100%;
+    text-align: left;
+  }
+
+  .right {
+    align-self: flex-end;
+  }
+}

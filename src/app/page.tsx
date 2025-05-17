@@ -1,9 +1,5 @@
-import { Header } from "@/conponents/header/Header"
+import { Slider } from "@/components/slider/Slider"
 
 export default function Home() {
-  return (
-    <>
-      <Header />
-    </>
-  )
+  return <Slider />
 }

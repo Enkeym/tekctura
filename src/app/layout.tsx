@@ -1,3 +1,5 @@
+import { Footer } from "@/components/footer/Footer"
+import { Header } from "@/components/header/Header"
 import type { Metadata } from "next"
 import "./fonts.scss"
 import "./globals.css"
@@ -41,7 +43,11 @@ export default function RootLayout({
         {/* Подключение шрифтов */}
       </head>
       <body>
-        <div className="container">{children}</div>
+        <Header />
+        <div className="container">
+          <main>{children}</main>
+        </div>
+        <Footer />
       </body>
     </html>
   )

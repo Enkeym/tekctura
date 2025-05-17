@@ -4,8 +4,11 @@
   box-sizing: border-box;
 }
 
-body {
+body,
+button {
   font-family: "StereoGothic", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   background-color: #000;
   color: #fff;
 }
@@ -13,6 +16,11 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
 }
 
 .container {
