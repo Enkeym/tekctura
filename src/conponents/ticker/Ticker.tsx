@@ -23,11 +23,14 @@ const phrases = [
 
 export const Ticker = () => {
   const baseX = useMotionValue(0)
-  const baseVelocity = 150
+  const containerRef = useRef<HTMLDivElement>(null)
   const loopRef = useRef<HTMLDivElement>(null)
   const [loopWidth, setLoopWidth] = useState(0)
 
-  // Измеряем только один цикл
+  // Сохраняем текущую скорость отдельно
+  const defaultVelocity = 150
+  const velocityRef = useRef(defaultVelocity)
+
   useLayoutEffect(() => {
     if (loopRef.current) {
       setLoopWidth(loopRef.current.offsetWidth)
@@ -37,12 +40,25 @@ export const Ticker = () => {
   const x = useTransform(baseX, (v) => `${wrap(-loopWidth, 0, v)}px`)
 
   useAnimationFrame((_, delta) => {
-    const moveBy = baseVelocity * (delta / 1000)
+    const moveBy = velocityRef.current * (delta / 1000)
     baseX.set(baseX.get() + moveBy)
   })
 
+  const handleMouseEnter = () => {
+    velocityRef.current = 0
+  }
+
+  const handleMouseLeave = () => {
+    velocityRef.current = defaultVelocity
+  }
+
   return (
-    <div className={styles.ticker}>
+    <div
+      className={styles.ticker}
+      ref={containerRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <motion.div className={styles.tickerIn} style={{ x }}>
         <div className={styles.loop} ref={loopRef}>
           {phrases.map((txt, idx) => (

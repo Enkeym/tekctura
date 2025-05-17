@@ -40,7 +40,9 @@ export default function RootLayout({
         />
         {/* Подключение шрифтов */}
       </head>
-      <body>{children}</body>
+      <body>
+        <div className="container">{children}</div>
+      </body>
     </html>
   )
 }
