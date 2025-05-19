@@ -3,22 +3,35 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 2.5rem;
   background-color: #000;
+  color: #fff;
   width: 100%;
   overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  position: relative;
 }
 
+/* Логотип */
 .logo {
+  display: flex;
+  align-items: center;
   max-height: 48px;
   height: auto;
   width: auto;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
+  transition: transform 0.3s ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
 }
 
+/* Бегущая строка */
 .tickerWrapper {
   flex: 1;
   overflow: hidden;
+  max-width: 100%;
 }

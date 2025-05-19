@@ -2,45 +2,101 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 3rem;
   background-color: #000;
   color: #fff;
   font-size: 1rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  row-gap: 2rem;
+  column-gap: 3rem;
 }
 
-.left,
-.right {
+/* Левая часть: соцсети */
+.left {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  min-width: 160px;
+
+  .socialList {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+    }
+
+    .icon {
+      font-size: 2rem;
+      color: #fff;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+
+      &:hover,
+      &:focus {
+        transform: scale(1.15);
+        opacity: 0.75;
+      }
+    }
+  }
 }
 
-.icon {
-  font-size: 1.8rem;
-}
-
+/* Центр: информационные блоки */
 .center {
   text-align: center;
-  flex: 1;
-  font-weight: 500;
-  font-size: 1.1rem;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+
+  > * + * {
+    margin-top: 1rem;
+  }
 }
 
-@media (max-width: 600px) {
+/* Правая часть: контакты */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 200px;
+  font-style: normal;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
   .footer {
     flex-direction: column;
     align-items: flex-start;
+    gap: 2.5rem;
+    padding: 2rem;
   }
 
   .center {
-    width: 100%;
     text-align: left;
+    width: 100%;
+  }
+
+  .left .socialList {
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .right {
-    align-self: flex-end;
+    width: 100%;
   }
 }

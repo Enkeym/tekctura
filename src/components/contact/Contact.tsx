@@ -123,7 +123,7 @@ export const Contact = () => {
 
         {status === "success" && (
           <p style={{ color: "limegreen", marginTop: "1rem" }}>
-            ✅ Заявка отправлена! Закроется через 1 сек.
+            Ваша Заявка принята в работу!
           </p>
         )}
         {status === "error" && (

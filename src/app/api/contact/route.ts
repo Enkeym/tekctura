@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     }
 
     const message = `
-Бро, заявочка 🚀 подлетела:
+Новая заявка:
 Имя: ${data.name}
 Телефон: ${data.phone}
 `

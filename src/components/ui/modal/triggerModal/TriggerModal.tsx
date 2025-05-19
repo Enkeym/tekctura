@@ -6,8 +6,8 @@ import { ContentModal } from "../contentModal/ContentModal"
 import WrapperModal from "../wrapperModal/WrapperModal"
 
 interface TriggerModalProps {
-  buttonLabel: string
-  titleModal: string
+  buttonLabel?: string
+  titleModal?: string
   children?: React.ReactNode
   onRequestClose?: (closeFn: () => void) => void
 }

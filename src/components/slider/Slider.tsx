@@ -2,27 +2,50 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { SlideModal } from "../ui/modal/slideModal/SlideModal"
 import styles from "./Slider.module.scss"
 
-interface Slide {
+export interface Slide {
   title: string
-  type: "gif" | "image"
-  src: string
+  description?: string
+  media: { type: "gif" | "image"; src: string }[]
 }
 
 const slides: Slide[] = [
-  { title: "Цифровой лес", type: "gif", src: "/assets/videos/les.gif" },
-  { title: "ЭХО", type: "gif", src: "/assets/videos/tv_3_2.gif" },
+  {
+    title: "Цифровой лес",
+    media: [
+      { src: "/assets/videos/les.gif", type: "gif" },
+      { src: "/assets/videos/les_2.gif", type: "gif" }
+    ]
+  },
+  {
+    title: "ЭХО",
+    media: [
+      { type: "gif", src: "/assets/videos/tv_3_2.gif" },
+      { type: "gif", src: "/assets/videos/tv_3.gif" }
+    ]
+  },
   {
     title: "Перформанс",
-    type: "image",
-    src: "/assets/images/Light-5.jpg"
+    media: [
+      { type: "image", src: "/assets/images/Light-5.jpg" },
+      {
+        type: "image",
+        src: "/assets/images/Firelight-Labyrinth_render-02_supplied.jpg"
+      },
+      {
+        type: "image",
+        src: "/assets/images/SOF_8434.jpg"
+      }
+    ]
   }
 ]
 
 export const Slider = () => {
   const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState(0) // -1 влево, 1 вправо
+  const [direction, setDirection] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const changeSlide = useCallback((delta: number) => {
@@ -45,6 +68,7 @@ export const Slider = () => {
   }, [changeSlide])
 
   const current = slides[active]
+  const preview = current.media[0]
 
   // Анимации с учётом направления
   const variants = {
@@ -75,16 +99,17 @@ export const Slider = () => {
     >
       <AnimatePresence mode="wait" custom={direction}>
         <motion.figure
-          key={current.src}
+          key={preview.src}
           className={styles.slide}
           custom={direction}
           variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
+          onClick={() => setModalOpen(true)}
         >
           <motion.img
-            src={current.src}
+            src={preview.src}
             alt={current.title}
             loading="lazy"
             className={styles.image}
@@ -104,6 +129,14 @@ export const Slider = () => {
           </motion.figcaption>
         </motion.figure>
       </AnimatePresence>
+
+      <SlideModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={current.title}
+        description={current.description}
+        media={current.media}
+      />
     </section>
   )
 }
