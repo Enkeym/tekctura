@@ -1,0 +1,32 @@
+/* Slider.module.scss */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 73vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: white;
+  font-size: 1.3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
