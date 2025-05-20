@@ -70,24 +70,32 @@ export const Slider = () => {
   const current = slides[active]
   const preview = current.media[0]
 
-  // Анимации с учётом направления
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
       opacity: 0,
-      scale: 0.95
+      scale: 0.8,
+      rotateY: direction > 0 ? 45 : -45,
+      z: -200
     }),
     center: {
-      x: 0,
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      rotateY: 0,
+      z: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.33, 1, 0.68, 1]
+      }
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? -100 : 100,
       opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.6, ease: "easeIn" }
+      scale: 0.8,
+      rotateY: direction > 0 ? -45 : 45,
+      z: -200,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1]
+      }
     })
   }
 
