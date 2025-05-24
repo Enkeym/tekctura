@@ -17,7 +17,6 @@ export const Logo = () => {
   const controlsSplitBottom = useAnimation()
 
   const startGlitch = () => {
-    // Верхняя часть логотипа — уходит вверх
     controlsBase.start({
       y: [0, -10, -20, -10, 0],
       transition: { duration: 0.5 }
@@ -61,6 +60,14 @@ export const Logo = () => {
       controlsR.stop()
       controlsG.stop()
       controlsB.stop()
+      controlsSplitBottom.stop()
+
+      controlsBase.set({ y: 0 })
+      controlsSplitBottom.set({ y: 0 })
+      controlsR.set({ x: 0, y: 0, opacity: 0 })
+      controlsG.set({ x: 0, y: 0, opacity: 0 })
+      controlsB.set({ x: 0, y: 0, opacity: 0 })
+
       if (glitchTimeout.current) clearTimeout(glitchTimeout.current)
       if (glitchInterval.current) clearInterval(glitchInterval.current)
     }

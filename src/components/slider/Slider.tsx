@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { SlideModal } from "../ui/modal/slideModal/SlideModal"
 import styles from "./Slider.module.scss"
 
 export interface Slide {
@@ -137,14 +136,6 @@ export const Slider = () => {
           </motion.figcaption>
         </motion.figure>
       </AnimatePresence>
-
-      <SlideModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title={current.title}
-        description={current.description}
-        media={current.media}
-      />
     </section>
   )
 }
