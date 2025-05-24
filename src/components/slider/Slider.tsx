@@ -44,7 +44,6 @@ const slides: Slide[] = [
 export const Slider = () => {
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
-  const [modalOpen, setModalOpen] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const changeSlide = useCallback((delta: number) => {
@@ -54,7 +53,7 @@ export const Slider = () => {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (timeoutRef.current || modalOpen) return
+      if (timeoutRef.current) return
       const delta = e.deltaY > 0 ? 1 : -1
       changeSlide(delta)
       timeoutRef.current = setTimeout(() => {
@@ -64,7 +63,7 @@ export const Slider = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: true })
     return () => window.removeEventListener("wheel", handleWheel)
-  }, [changeSlide, modalOpen])
+  }, [changeSlide])
 
   const current = slides[active]
   const preview = current.media[0]
@@ -113,7 +112,6 @@ export const Slider = () => {
           initial="enter"
           animate="center"
           exit="exit"
-          onClick={() => setModalOpen(true)}
         >
           <motion.img
             src={preview.src}
