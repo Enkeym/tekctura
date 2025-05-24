@@ -1,6 +1,6 @@
 "use client"
 
-import { WhoAreWe } from "@/whoAreWe/WhoAreWe"
+import { WhoAreWe } from "@/components/whoAreWe/WhoAreWe"
 import { CiInstagram, CiMail } from "react-icons/ci"
 import { PiTelegramLogoLight } from "react-icons/pi"
 import { About } from "../about/About"

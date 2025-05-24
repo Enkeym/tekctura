@@ -55,7 +55,7 @@ export const Slider = () => {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (timeoutRef.current) return
+      if (timeoutRef.current || modalOpen) return
       const delta = e.deltaY > 0 ? 1 : -1
       changeSlide(delta)
       timeoutRef.current = setTimeout(() => {
@@ -65,7 +65,7 @@ export const Slider = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: true })
     return () => window.removeEventListener("wheel", handleWheel)
-  }, [changeSlide])
+  }, [changeSlide, modalOpen])
 
   const current = slides[active]
   const preview = current.media[0]
