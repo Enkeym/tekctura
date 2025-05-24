@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./Slider.module.scss"
+import { section } from "framer-motion/client"
 
 export interface Slide {
   title: string
@@ -45,6 +46,20 @@ export const Slider = () => {
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const startX = useRef(0)
+  const isMobile = useRef(false)
+
+  // Обновление флага тач-устройств
+  useEffect(() => {
+    const check = () => {
+      const small = window.matchMedia("(max-width: 768px)").matches
+      const coarse = window.matchMedia("(pointer: coarse)").matches
+      isMobile.current = small && coarse
+    }
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
 
   const changeSlide = useCallback((delta: number) => {
     setDirection(delta)
@@ -97,6 +112,23 @@ export const Slider = () => {
     })
   }
 
+  const handleSwipe = {
+    start: (event: any, info: any) => {
+      if (!isMobile.current) return
+      startX.current = info.point.x
+    },
+    end: (event: any, info: any) => {
+      if (!isMobile.current || timeoutRef.current) return
+      const deltaX = info.point.x - startX.current
+      if (Math.abs(deltaX) > 50) {
+        changeSlide(deltaX < 0 ? 1 : -1)
+        timeoutRef.current = setTimeout(() => {
+          timeoutRef.current = null
+        }, 1000)
+      }
+    }
+  }
+
   return (
     <section
       className={styles.slider}
@@ -112,6 +144,11 @@ export const Slider = () => {
           initial="enter"
           animate="center"
           exit="exit"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onPanStart={handleSwipe.start}
+          onPanEnd={handleSwipe.end}
         >
           <motion.img
             src={preview.src}
