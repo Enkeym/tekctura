@@ -11,9 +11,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
   position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 
-/* Логотип */
 .logo {
   display: flex;
   align-items: center;
@@ -29,9 +34,13 @@
   }
 }
 
-/* Бегущая строка */
 .tickerWrapper {
   flex: 1;
   overflow: hidden;
   max-width: 100%;
+  padding: 1rem 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }

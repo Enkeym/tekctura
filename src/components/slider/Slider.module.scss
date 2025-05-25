@@ -9,6 +9,10 @@
   perspective: 1500px;
   transform-style: preserve-3d;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 63vh;
+  }
 }
 
 .slide {
@@ -33,4 +37,8 @@
   color: white;
   font-size: 1.3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 }
