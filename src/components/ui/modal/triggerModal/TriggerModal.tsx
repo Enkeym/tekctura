@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button/Button"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ContentModal } from "../contentModal/ContentModal"
 import WrapperModal from "../wrapperModal/WrapperModal"
 

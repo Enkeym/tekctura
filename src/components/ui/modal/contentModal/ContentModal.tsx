@@ -1,7 +1,7 @@
 import styles from "./ContentModal.module.scss"
 
 interface ContentModalProps {
-  title: string
+  title?: string
   children: React.ReactNode
 }
 
