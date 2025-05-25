@@ -1,9 +1,9 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import styles from "./Slider.module.scss"
-import { section } from "framer-motion/client"
+import { useSliderNavigation } from "./lib/useSliderNavigation"
 
 export interface Slide {
   title: string
@@ -43,9 +43,9 @@ const slides: Slide[] = [
 ]
 
 export const Slider = () => {
-  const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const { active, direction, throttleSlideChange, timeoutRef } =
+    useSliderNavigation(slides.length)
+  const sliderRef = useRef<HTMLElement | null>(null)
   const startX = useRef(0)
   const isMobile = useRef(false)
 
@@ -61,24 +61,16 @@ export const Slider = () => {
     return () => window.removeEventListener("resize", check)
   }, [])
 
-  const changeSlide = useCallback((delta: number) => {
-    setDirection(delta)
-    setActive((prev) => (prev + delta + slides.length) % slides.length)
-  }, [])
-
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (timeoutRef.current) return
+      if (!sliderRef.current?.contains(e.target as Node)) return
       const delta = e.deltaY > 0 ? 1 : -1
-      changeSlide(delta)
-      timeoutRef.current = setTimeout(() => {
-        timeoutRef.current = null
-      }, 1000)
+      throttleSlideChange(delta)
     }
 
     window.addEventListener("wheel", handleWheel, { passive: true })
     return () => window.removeEventListener("wheel", handleWheel)
-  }, [changeSlide])
+  }, [throttleSlideChange])
 
   const current = slides[active]
   const preview = current.media[0]
@@ -121,16 +113,14 @@ export const Slider = () => {
       if (!isMobile.current || timeoutRef.current) return
       const deltaX = info.point.x - startX.current
       if (Math.abs(deltaX) > 50) {
-        changeSlide(deltaX < 0 ? 1 : -1)
-        timeoutRef.current = setTimeout(() => {
-          timeoutRef.current = null
-        }, 1000)
+        throttleSlideChange(deltaX < 0 ? 1 : -1)
       }
     }
   }
 
   return (
     <section
+      ref={sliderRef}
       className={styles.slider}
       aria-label="Примеры проектов студии"
       role="region"

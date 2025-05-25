@@ -6,8 +6,6 @@ export const Fuck = () => {
       viewBox="0 0 60 60"
       width="60px"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <title />
       <desc />
