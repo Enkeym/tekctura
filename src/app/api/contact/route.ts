@@ -26,11 +26,11 @@ export async function POST(req: Request) {
     }
 
     const message = `
-Новая заявка:
-Имя: ${data.name}
-Телефон: ${data.phone}
-`
+📝 *Новая заявка*
 
+👤 *Имя:* ${data.name}
+📞 *Телефон:* ${data.phone}
+`
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!
     const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID!
 

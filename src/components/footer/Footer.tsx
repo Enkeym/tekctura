@@ -4,8 +4,8 @@ import { WhoAreWe } from "@/components/whoAreWe/WhoAreWe"
 import { CiInstagram, CiMail } from "react-icons/ci"
 import { PiTelegramLogoLight } from "react-icons/pi"
 import { About } from "../about/About"
-import styles from "./Footer.module.scss"
 import { Contact } from "../contact/Contact"
+import styles from "./Footer.module.scss"
 
 export const Footer = () => {
   return (
@@ -56,10 +56,6 @@ export const Footer = () => {
         </section>
       </div>
 
-      <div className={styles.contactWrapper}>
-        <Contact />
-      </div>
-
       {/* Только на десктопе — доп. информация */}
       <section
         className={`${styles.center} ${styles.hideOnMobile}`}
@@ -67,6 +63,10 @@ export const Footer = () => {
       >
         <WhoAreWe />
       </section>
+
+      <div className={styles.contactWrapper}>
+        <Contact />
+      </div>
     </footer>
   )
 }
