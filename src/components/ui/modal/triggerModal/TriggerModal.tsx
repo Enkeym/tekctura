@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button/Button"
 import React, { useEffect, useState } from "react"
 import { ContentModal } from "../contentModal/ContentModal"
 import WrapperModal from "../wrapperModal/WrapperModal"
+import styles from "./TriggerModal.module.scss"
 
 interface TriggerModalProps {
   buttonLabel?: string
@@ -28,7 +29,9 @@ export const TriggerModal = ({
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>{buttonLabel}</Button>
+      <Button className={styles.triggerButton} onClick={() => setIsOpen(true)}>
+        {buttonLabel}
+      </Button>
       <WrapperModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ContentModal title={titleModal}>{children}</ContentModal>
       </WrapperModal>
