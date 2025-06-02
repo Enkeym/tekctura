@@ -1,42 +1,24 @@
 .footer {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 1.5rem 2.5rem;
+  gap: 1rem;
   background-color: #000;
   color: #fff;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
+  height: 15vh;
 
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-}
-
-.topRow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  gap: 1.5rem;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-    gap: 2rem;
+  @media (max-width: 760px) {
+    padding: 1rem 2rem;
+    height: 13vh;
   }
 }
 
 .left {
   display: flex;
-  flex-direction: column;
-  min-width: 160px;
 
   .socialList {
     list-style: none;
@@ -46,11 +28,6 @@
     gap: 1rem;
     padding: 0;
     margin: 0;
-
-    li {
-      display: flex;
-      align-items: center;
-    }
 
     .icon {
       font-size: 1.6rem;
@@ -66,60 +43,18 @@
   }
 }
 
-.rightBlock {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.center {
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  line-height: 1.4;
-
-  > * + * {
-    margin-top: 0;
-  }
-
-  @media (max-width: 1024px) {
-    text-align: left;
-  }
-}
-
 .contactWrapper {
-  width: 100%;
-  font-style: normal;
-  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
 
-  @media (min-width: 1024px) {
-    width: auto;
-    flex: 1;
-    text-align: right;
+  @media (max-width: 760px) {
+    margin: 0 auto;
   }
 
   a {
     color: #fff;
     font-size: 0.95rem;
     text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      opacity: 0.8;
-    }
-  }
-}
-
-/* Скрытие блока WhoAreWe на мобилке */
-.hideOnMobile {
-  @media (max-width: 768px) {
-    display: none !important;
-  }
-
-  @media (min-width: 1024px) {
-    flex: 1;
-    text-align: right;
   }
 }

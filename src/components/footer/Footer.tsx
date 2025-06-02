@@ -8,18 +8,14 @@ import styles from "./Footer.module.scss"
 
 export const Footer = () => {
   return (
-    <footer
-      className={styles.footer}
-      aria-label="Контактная информация и ссылки"
-    >
-      {/* Горизонтальный блок: соцсети + About */}
-      <div className={styles.topRow}>
-        <section className={styles.center}>
-          <About />
-        </section>
-      </div>
+    <footer className={styles.footer} aria-label="Подвал сайта">
+      {/* О нас */}
+      <section className={styles.topRow} aria-labelledby="footer-about-heading">
+        <About />
+      </section>
 
-      <nav className={styles.left} aria-label="Социальные сети">
+      {/* Социальные сети */}
+      <nav className={styles.left} aria-labelledby="footer-social-heading">
         <ul className={styles.socialList}>
           <li>
             <a
@@ -55,9 +51,13 @@ export const Footer = () => {
         </ul>
       </nav>
 
-      <div className={styles.contactWrapper}>
+      {/* Контактная информация */}
+      <section
+        className={styles.contactWrapper}
+        aria-labelledby="footer-contact-heading"
+      >
         <Contact />
-      </div>
+      </section>
     </footer>
   )
 }

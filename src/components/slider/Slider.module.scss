@@ -1,7 +1,7 @@
 .slider {
   position: relative;
   width: 100%;
-  height: 72vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,8 +10,8 @@
   transform-style: preserve-3d;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    height: 63vh;
+  @media (max-width: 760px) {
+    height: 75vh;
   }
 }
 
@@ -38,7 +38,7 @@
   font-size: 1.3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
+  @media (max-width: 760px) {
+    font-size: 1rem;
   }
 }
