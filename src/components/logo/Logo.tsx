@@ -53,8 +53,8 @@ export const Logo = () => {
     if (hovered) {
       glitchTimeout.current = setTimeout(() => {
         startGlitch()
-        glitchInterval.current = setInterval(startGlitch, 1000)
-      }, 1000)
+        glitchInterval.current = setInterval(startGlitch, 500)
+      }, 500)
     } else {
       controlsBase.stop()
       controlsR.stop()

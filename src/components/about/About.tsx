@@ -2,7 +2,7 @@ import { TriggerModal } from "../ui/modal/triggerModal/TriggerModal"
 
 export const About = () => {
   return (
-    <TriggerModal buttonLabel="О НАС" titleModal="О студии ТЕКСТУРА">
+    <TriggerModal buttonLabel="КТО МЫ?" titleModal="О НАС">
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <p>
           Мы — студия медиа-дизайна ТЕКСТУРА. Объединяем технологии, искусство и

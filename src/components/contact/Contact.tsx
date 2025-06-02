@@ -69,7 +69,7 @@ export const Contact = () => {
 
   return (
     <TriggerModal
-      buttonLabel="НАПИШИ МНЕ"
+      buttonLabel="СВЯЗАТЬСЯ С НАМИ"
       titleModal="Связаться с нами"
       onRequestClose={(close) => {
         closeModalRef.current = close
