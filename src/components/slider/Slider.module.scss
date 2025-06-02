@@ -9,14 +9,6 @@
   perspective: 1500px;
   transform-style: preserve-3d;
   overflow: hidden;
-
-  @media (max-width: 760px) {
-    height: 75vh;
-  }
-
-  @media (max-width: 400px) {
-    height: 72vh;
-  }
 }
 
 .slide {
