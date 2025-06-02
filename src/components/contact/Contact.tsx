@@ -102,15 +102,6 @@ export const Contact = () => {
           placeholder="+7 999 999-99-99"
           type="tel"
           required
-          style={{
-            width: "100%",
-            padding: "12px",
-            fontSize: "16px",
-            borderRadius: "6px",
-            border: "1px solid #888",
-            backgroundColor: "#000",
-            color: "#fff"
-          }}
         />
 
         <button type="submit" disabled={status === "loading" || isBlocked}>

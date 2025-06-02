@@ -1,12 +1,6 @@
 export const Fuck = () => {
   return (
-    <svg
-      height="60px"
-      version="1.1"
-      viewBox="0 0 60 60"
-      width="60px"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg version="1.1" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
       <title />
       <desc />
       <defs />

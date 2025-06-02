@@ -25,7 +25,9 @@ const WrapperModal = ({ children, isOpen, onClose }: ModalWrapperProps) => {
       {isOpen && (
         <motion.div
           className={styles.overlay}
-          onClick={onClose}
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) onClose()
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

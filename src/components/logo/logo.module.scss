@@ -1,8 +1,9 @@
 .logoSvg {
-  width: 100%;
+  width: 18rem;
+  max-width: 100%;
   height: auto;
   display: block;
-  cursor: url("/fuck.svg") 16 16, auto;
+  cursor: url("/fuck.svg"), auto;
   background: black;
 }
 

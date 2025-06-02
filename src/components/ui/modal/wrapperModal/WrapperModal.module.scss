@@ -48,3 +48,39 @@
     font-size: 1.5rem;
   }
 }
+
+/* 2K (1920px+) */
+@media (min-width: 1920px) {
+  .modal {
+    max-width: 1200px;
+    font-size: 1.125rem;
+    padding: 2.5rem;
+  }
+}
+
+/* 3K (2560px+) */
+@media (min-width: 2560px) {
+  .modal {
+    max-width: 1400px;
+    font-size: 1.25rem;
+    padding: 3rem;
+  }
+}
+
+/* 4K (3840px+) */
+@media (min-width: 3840px) {
+  .modal {
+    max-width: 1600px;
+    font-size: 1.375rem;
+    padding: 3.5rem;
+  }
+}
+
+/* 5K (5120px+) */
+@media (min-width: 5120px) {
+  .modal {
+    max-width: 1800px;
+    font-size: 1.5rem;
+    padding: 4rem;
+  }
+}
