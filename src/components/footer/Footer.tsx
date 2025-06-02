@@ -55,14 +55,6 @@ export const Footer = () => {
         </ul>
       </nav>
 
-      {/* Только на десктопе — доп. информация */}
-      {/* <section
-        className={`${styles.center} ${styles.hideOnMobile}`}
-        aria-label="Информация о студии"
-      >
-        <WhoAreWe />
-      </section>  */}
-
       <div className={styles.contactWrapper}>
         <Contact />
       </div>

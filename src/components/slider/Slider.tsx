@@ -77,28 +77,25 @@ export const Slider = () => {
 
   const variants = {
     enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? 45 : -45,
-      z: -200
+      position: "absolute"
     }),
     center: {
+      x: 0,
       opacity: 1,
-      scale: 1,
-      rotateY: 0,
-      z: 0,
+      position: "relative",
       transition: {
-        duration: 0.8,
+        duration: 0.5,
         ease: [0.33, 1, 0.68, 1]
       }
     },
     exit: (direction: number) => ({
+      x: direction > 0 ? -300 : 300,
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? -45 : 45,
-      z: -200,
+      position: "absolute",
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: [0.4, 0, 0.2, 1]
       }
     })
