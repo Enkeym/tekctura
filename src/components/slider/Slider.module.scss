@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   perspective: 1500px;
   transform-style: preserve-3d;
   overflow: hidden;
@@ -16,6 +15,7 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
+  will-change: opacity, transform;
 }
 
 .image {
@@ -24,17 +24,22 @@
   object-fit: cover;
   backface-visibility: hidden;
   transform-style: preserve-3d;
+  will-change: opacity, transform;
 }
 
 .caption {
+  position: absolute;
   bottom: 2rem;
+  left: 2rem;
   padding-right: 1rem;
   padding-bottom: env(safe-area-inset-bottom, 1rem);
   max-width: 80%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: 1.4;
   word-break: break-word;
   pointer-events: none;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 
   @media (max-width: 760px) {
     font-size: 1rem;

@@ -34,22 +34,19 @@ const slides: Slide[] = [
         type: "image",
         src: "/assets/images/Firelight-Labyrinth_render-02_supplied.jpg"
       },
-      {
-        type: "image",
-        src: "/assets/images/SOF_8434.jpg"
-      }
+      { type: "image", src: "/assets/images/SOF_8434.jpg" }
     ]
   }
 ]
 
 export const Slider = () => {
-  const { active, direction, throttleSlideChange, timeoutRef } =
-    useSliderNavigation(slides.length)
+  const { active, throttleSlideChange, timeoutRef } = useSliderNavigation(
+    slides.length
+  )
   const sliderRef = useRef<HTMLElement | null>(null)
   const startX = useRef(0)
   const isMobile = useRef(false)
 
-  // Обновление флага тач-устройств
   useEffect(() => {
     const check = () => {
       const small = window.matchMedia("(max-width: 768px)").matches
@@ -75,38 +72,12 @@ export const Slider = () => {
   const current = slides[active]
   const preview = current.media[0]
 
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-      position: "absolute"
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      position: "relative",
-      transition: {
-        duration: 0.5,
-        ease: [0.33, 1, 0.68, 1]
-      }
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
-      opacity: 0,
-      position: "absolute",
-      transition: {
-        duration: 0.4,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    })
-  }
-
   const handleSwipe = {
-    start: (event: any, info: any) => {
+    start: (_: any, info: any) => {
       if (!isMobile.current) return
       startX.current = info.point.x
     },
-    end: (event: any, info: any) => {
+    end: (_: any, info: any) => {
       if (!isMobile.current || timeoutRef.current) return
       const deltaX = info.point.x - startX.current
       if (Math.abs(deltaX) > 50) {
@@ -122,18 +93,14 @@ export const Slider = () => {
       aria-label="Примеры проектов студии"
       role="region"
     >
-      <AnimatePresence mode="wait" custom={direction}>
+      <AnimatePresence mode="wait">
         <motion.figure
           key={preview.src}
           className={styles.slide}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.2}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6 }}
           onPanStart={handleSwipe.start}
           onPanEnd={handleSwipe.end}
         >
@@ -144,15 +111,17 @@ export const Slider = () => {
             className={styles.image}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
           />
 
           <motion.figcaption
+            key={current.title}
             className={styles.caption}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h2>{current.title}</h2>
           </motion.figcaption>
