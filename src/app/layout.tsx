@@ -35,13 +35,20 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/fonts/StereoGothicW06-300.woff2"
+          href="/fonts/heliosext.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {/* Подключение шрифтов */}
+        <link
+          rel="preload"
+          href="/fonts/Stereo-Gothic-950.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
       </head>
+
       <body>
         <Header />
         <main>{children}</main>
