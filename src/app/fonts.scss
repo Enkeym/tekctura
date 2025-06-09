@@ -1,3 +1,5 @@
+/* Stereo Gothic */
+
 @font-face {
   font-family: "StereoGothic";
   src: url("/fonts/StereoGothicW06-300.woff2") format("woff2"),
@@ -36,34 +38,19 @@
 
 @font-face {
   font-family: "StereoGothic";
-  src: url("/fonts/Stereo Gothic W06 950 Italic.woff2") format("woff2"),
-    url("/fonts/Stereo Gothic W06 950 Italic.woff") format("woff");
+  src: url("/fonts/StereoGothicW01-950.woff2") format("woff2"),
+    url("/fonts/StereoGothicW01-950.woff") format("woff");
   font-weight: 950;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* HeliosExt */
-@font-face {
-  font-family: "HeliosExt";
-  src: url("/fonts/heliosext.otf") format("opentype");
-  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: "HeliosExt";
-  src: url("/fonts/heliosext_italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
+/* HeliosExt */
 
 @font-face {
   font-family: "HeliosExt";
-  src: url("/fonts/heliosext_bold_italic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
+  src: url("/fonts/heliosext.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
