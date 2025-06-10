@@ -3,16 +3,22 @@ import { useCallback, useEffect, useRef, useState } from "react"
 type Params = {
   length: number
   containerRef: React.RefObject<HTMLElement | null>
+  swipeThreshold?: number
+  throttleMs?: number
 }
 
-export const useSliderNavigation = ({ length, containerRef }: Params) => {
+export const useSliderNavigation = ({
+  length,
+  containerRef,
+  swipeThreshold = 50,
+  throttleMs = 1000
+}: Params) => {
   const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState(0)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const touchStartX = useRef(0)
 
   const changeSlide = useCallback(
     (delta: number) => {
-      setDirection(delta)
       setActive((prev) => (prev + delta + length) % length)
     },
     [length]
@@ -24,16 +30,14 @@ export const useSliderNavigation = ({ length, containerRef }: Params) => {
       changeSlide(delta)
       timeoutRef.current = setTimeout(() => {
         timeoutRef.current = null
-      }, 1000)
+      }, throttleMs)
     },
-    [changeSlide]
+    [changeSlide, throttleMs]
   )
 
   useEffect(() => {
-    if (!containerRef?.current) return
-
     const el = containerRef.current
-    const startX = { current: 0 }
+    if (!el) return
 
     const onWheel = (e: WheelEvent) => {
       if (!el.contains(e.target as Node)) return
@@ -41,12 +45,12 @@ export const useSliderNavigation = ({ length, containerRef }: Params) => {
     }
 
     const onTouchStart = (e: TouchEvent) => {
-      startX.current = e.touches[0].clientX
+      touchStartX.current = e.touches[0].clientX
     }
 
     const onTouchEnd = (e: TouchEvent) => {
-      const deltaX = e.changedTouches[0].clientX - startX.current
-      if (Math.abs(deltaX) > 50) {
+      const deltaX = e.changedTouches[0].clientX - touchStartX.current
+      if (Math.abs(deltaX) > swipeThreshold) {
         throttleSlideChange(deltaX < 0 ? 1 : -1)
       }
     }
@@ -60,12 +64,9 @@ export const useSliderNavigation = ({ length, containerRef }: Params) => {
       el.removeEventListener("touchstart", onTouchStart)
       el.removeEventListener("touchend", onTouchEnd)
     }
-  }, [containerRef, throttleSlideChange])
+  }, [containerRef, swipeThreshold, throttleSlideChange])
 
   return {
-    active,
-    direction,
-    throttleSlideChange,
-    timeoutRef
+    active
   }
 }

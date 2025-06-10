@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { slides } from "../gallery/data"
 import { UniversalImage } from "../ui/Image/UniversalImage"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
@@ -10,45 +10,16 @@ import { SingleSlide } from "./singleSlide/SingleSlide"
 import styles from "./Slider.module.scss"
 
 export const Slider = () => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const sliderRef = useRef<HTMLElement | null>(null)
-  const modalContainerRef = useRef<HTMLElement | null>(null)
-  const startX = useRef(0)
-  const isMobile = useRef(false)
 
-  const { active, direction, throttleSlideChange, timeoutRef } =
-    useSliderNavigation({
-      length: slides.length,
-      containerRef: modalOpen ? modalContainerRef : sliderRef
-    })
-
-  useEffect(() => {
-    const check = () => {
-      const small = window.matchMedia("(max-width: 768px)").matches
-      const coarse = window.matchMedia("(pointer: coarse)").matches
-      isMobile.current = small && coarse
-    }
-    check()
-    window.addEventListener("resize", check)
-    return () => window.removeEventListener("resize", check)
-  }, [])
+  const { active } = useSliderNavigation({
+    length: slides.length,
+    containerRef: sliderRef
+  })
 
   const current = slides[active]
   const preview = current.media[0]
-
-  const handleSwipe = {
-    start: (_: any, info: any) => {
-      if (!isMobile.current) return
-      startX.current = info.point.x
-    },
-    end: (_: any, info: any) => {
-      if (!isMobile.current || timeoutRef.current) return
-      const deltaX = info.point.x - startX.current
-      if (Math.abs(deltaX) > 50) {
-        throttleSlideChange(deltaX < 0 ? 1 : -1)
-      }
-    }
-  }
 
   return (
     <>
@@ -57,6 +28,11 @@ export const Slider = () => {
         className={styles.slider}
         aria-label="Примеры проектов студии"
         role="region"
+        onClick={() => setModalOpen(true)}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") setModalOpen(true)
+        }}
       >
         <AnimatePresence mode="wait">
           <motion.figure
@@ -66,9 +42,6 @@ export const Slider = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            onPanStart={handleSwipe.start}
-            onPanEnd={handleSwipe.end}
-            onClick={() => setModalOpen(true)}
           >
             <motion.div
               className={styles.imageWrapper}
@@ -101,7 +74,7 @@ export const Slider = () => {
       </section>
 
       <WrapperModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <SingleSlide slide={slides[active]} direction={direction} />
+        <SingleSlide slide={slides[active]} />
       </WrapperModal>
     </>
   )
