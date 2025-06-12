@@ -6,8 +6,8 @@ export const slides: Slide[] = [
     description:
       "Иммерсивная аудиовизуальная инсталляция, воссоздающая ритмы цифровой природы. Световые потоки и звуковые ландшафты формируют синтетическое ощущение леса будущего.",
     media: [
-      { src: "/assets/videos/les.webp", kind: "animation" },
-      { src: "/assets/videos/les_2.webp", kind: "animation" }
+      { src: "/assets/videos/les.webm", kind: "animation" },
+      { src: "/assets/videos/les_2.webm", kind: "animation" }
     ]
   },
   {
@@ -15,8 +15,8 @@ export const slides: Slide[] = [
     description:
       "Экспериментальное видео, исследующее эффект памяти и цифрового дублирования в медиасреде. Каждый кадр — это отражение, потерявшее оригинал.",
     media: [
-      { src: "/assets/videos/tv_3_2.webp", kind: "animation" },
-      { src: "/assets/videos/tv_3.webp", kind: "animation" }
+      { src: "/assets/videos/tv_3_2.webm", kind: "animation" },
+      { src: "/assets/videos/tv_3.webm", kind: "animation" }
     ]
   },
   {

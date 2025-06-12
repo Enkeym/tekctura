@@ -1,21 +1,14 @@
-import Image from "next/image"
+import { MediaRenderer } from "../ui/media/MediaRenderer"
 import { TriggerModal } from "../ui/modal/triggerModal/TriggerModal"
 
 export const About = () => {
   return (
     <TriggerModal buttonLabel="КТО МЫ?" titleModal="О НАС">
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Image
+        <MediaRenderer
+          src="/assets/videos/tv_3.webm"
           alt="Медиаинсталляция студии ТЕКСТУРА в действии"
-          src="/assets/videos/tv_3.gif"
-          width={200}
-          height={200}
-          style={{
-            width: "100%",
-            height: "auto",
-            borderRadius: "1rem",
-            objectFit: "cover"
-          }}
+          kind="animation"
         />
         <p>
           Мы — студия медиа-дизайна ТЕКСТУРА. Объединяем технологии, искусство и

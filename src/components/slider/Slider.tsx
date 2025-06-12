@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useRef, useState } from "react"
 import { slides } from "../gallery/data"
-import { UniversalImage } from "../ui/Image/UniversalImage"
+import { MediaRenderer } from "../ui/media/MediaRenderer"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
 import { useSliderNavigation } from "./lib/useSliderNavigation"
 import { SingleSlide } from "./singleSlide/SingleSlide"
@@ -36,7 +36,7 @@ export const Slider = () => {
       >
         <AnimatePresence mode="wait">
           <motion.figure
-            key={preview.src}
+            key={active}
             className={styles.slide}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -50,10 +50,11 @@ export const Slider = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <UniversalImage
+              <MediaRenderer
+                kind={preview.kind}
                 src={preview.src}
                 alt={current.title}
-                className={styles.image}
+                className={styles.media}
                 priority={active === 0}
                 fill
               />
