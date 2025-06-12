@@ -1,26 +1,28 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .modal {
   position: relative;
   background: #111;
-  padding: 1rem;
-  border-radius: 14px;
+  color: #fff;
   width: 100%;
   max-width: 960px;
   max-height: 90vh;
   overflow-y: auto;
-  color: #fff;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .close {
@@ -30,9 +32,10 @@
   background: transparent;
   border: none;
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 2rem;
   cursor: pointer;
   z-index: 1000;
+  transition: opacity 0.2s;
 
   &:hover {
     opacity: 0.6;
@@ -41,7 +44,6 @@
 
 @media (max-width: 600px) {
   .modal {
-    padding: 1.25rem;
     max-height: 95vh;
   }
 
@@ -50,38 +52,34 @@
   }
 }
 
-/* 2K (1920px+) */
+/* 2K+ */
 @media (min-width: 1920px) {
   .modal {
     max-width: 1200px;
     font-size: 1.125rem;
-    padding: 2.5rem;
   }
 }
 
-/* 3K (2560px+) */
+/* 3K+ */
 @media (min-width: 2560px) {
   .modal {
     max-width: 1400px;
     font-size: 1.25rem;
-    padding: 3rem;
   }
 }
 
-/* 4K (3840px+) */
+/* 4K+ */
 @media (min-width: 3840px) {
   .modal {
     max-width: 1600px;
     font-size: 1.375rem;
-    padding: 3.5rem;
   }
 }
 
-/* 5K (5120px+) */
+/* 5K+ */
 @media (min-width: 5120px) {
   .modal {
     max-width: 1800px;
     font-size: 1.5rem;
-    padding: 4rem;
   }
 }

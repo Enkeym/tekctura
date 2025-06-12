@@ -59,6 +59,7 @@ export const Slider = () => {
                 priority={active === 0}
                 fill
               />
+              <MediaDots activeIndex={active} total={slides.length} />
             </motion.div>
             <motion.figcaption
               key={current.title}
@@ -70,8 +71,6 @@ export const Slider = () => {
             >
               <h2>{current.title}</h2>
             </motion.figcaption>
-
-            <MediaDots activeIndex={active} total={slides.length} />
           </motion.figure>
         </AnimatePresence>
       </section>

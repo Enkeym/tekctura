@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect } from "react"
-import { IoClose } from "react-icons/io5"
 import styles from "./WrapperModal.module.scss"
+import { IoClose } from "react-icons/io5"
 
 interface ModalWrapperProps {
   isOpen: boolean
@@ -35,10 +35,10 @@ const WrapperModal = ({ children, isOpen, onClose }: ModalWrapperProps) => {
           <motion.div
             className={styles.modal}
             onClick={(e) => e.stopPropagation()}
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
+            exit={{ y: 60, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
           >
             <button
               className={styles.close}
