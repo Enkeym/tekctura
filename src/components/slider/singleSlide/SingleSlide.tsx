@@ -1,5 +1,6 @@
 import { Slide } from "@/components/gallery/types/slide"
-import { MediaRenderer } from "@/components/ui/media/MediaRenderer"
+import { MediaDots } from "@/components/ui/media/mediaDots/mediaDots"
+import { MediaRenderer } from "@/components/ui/media/mediaRender/MediaRenderer"
 import { AnimatePresence, motion } from "framer-motion"
 import { useRef } from "react"
 import { useSliderNavigation } from "../lib/useSliderNavigation"
@@ -43,6 +44,9 @@ export const SingleSlide = ({ slide }: Props) => {
             />
           </motion.div>
         </AnimatePresence>
+        {media.length > 1 && (
+          <MediaDots activeIndex={activeMedia} total={media.length} />
+        )}
       </div>
 
       <div className={styles.text}>

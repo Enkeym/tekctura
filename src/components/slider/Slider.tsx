@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useRef, useState } from "react"
 import { slides } from "../gallery/data"
-import { MediaRenderer } from "../ui/media/MediaRenderer"
+import { MediaDots } from "../ui/media/mediaDots/mediaDots"
+import { MediaRenderer } from "../ui/media/mediaRender/MediaRenderer"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
 import { useSliderNavigation } from "./lib/useSliderNavigation"
 import { SingleSlide } from "./singleSlide/SingleSlide"
@@ -59,7 +60,6 @@ export const Slider = () => {
                 fill
               />
             </motion.div>
-
             <motion.figcaption
               key={current.title}
               className={styles.caption}
@@ -70,6 +70,8 @@ export const Slider = () => {
             >
               <h2>{current.title}</h2>
             </motion.figcaption>
+
+            <MediaDots activeIndex={active} total={slides.length} />
           </motion.figure>
         </AnimatePresence>
       </section>

@@ -1,4 +1,4 @@
-import { MediaRenderer } from "../ui/media/MediaRenderer"
+import { MediaRenderer } from "../ui/media/mediaRender/MediaRenderer"
 import { TriggerModal } from "../ui/modal/triggerModal/TriggerModal"
 
 export const About = () => {
