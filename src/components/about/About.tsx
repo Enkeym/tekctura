@@ -4,7 +4,13 @@ import { TriggerModal } from "../ui/modal/triggerModal/TriggerModal"
 export const About = () => {
   return (
     <TriggerModal buttonLabel="КТО МЫ?" titleModal="О НАС">
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem"
+        }}
+      >
         <MediaRenderer
           src="/assets/videos/tv_3.webm"
           alt="Медиаинсталляция студии ТЕКСТУРА в действии"

@@ -7,7 +7,7 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0 auto;
@@ -57,12 +57,12 @@
 
 @media (max-width: 767px) {
   .wrapper {
-    padding: 1.25rem;
+    padding: 1rem;
     gap: 1rem;
   }
 
   .title {
-    font-size: 1.25rem;
+    font-size: 0.75rem;
     text-align: center;
   }
 
@@ -89,7 +89,7 @@
   }
 
   .title {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
   }
 
   .body {
@@ -108,7 +108,7 @@
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .body {
@@ -128,7 +128,7 @@
   }
 
   .title {
-    font-size: 2.25rem;
+    font-size: 1.8rem;
   }
 
   .body {
@@ -141,10 +141,6 @@
     max-width: 1600px;
   }
 
-  .title {
-    font-size: 2.5rem;
-  }
-
   .body {
     font-size: 1.4rem;
   }
@@ -153,10 +149,6 @@
 @media (min-width: 5120px) {
   .wrapper {
     max-width: 1800px;
-  }
-
-  .title {
-    font-size: 2.75rem;
   }
 
   .body {

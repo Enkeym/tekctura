@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   background: #111;
-  border-radius: 16px;
+  border-radius: 1rem;
   overflow: hidden;
   color: white;
 }
@@ -17,20 +17,65 @@
 
 .image {
   width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  max-height: 300px;
+  max-height: 20rem;
+
+  @media (min-width: 90rem) {
+    // 1440px
+    max-height: 24rem;
+  }
+
+  @media (min-width: 120rem) {
+    // 1920px
+    max-height: 28rem;
+  }
+
+  @media (min-width: 160rem) {
+    // 2560px
+    max-height: 32rem;
+  }
+
+  @media (min-width: 240rem) {
+    // 3840px
+    max-height: 36rem;
+  }
 }
 
 .text {
   padding: 1.5rem;
+
+  @media (min-width: 90rem) {
+    padding: 2rem;
+  }
+
+  @media (min-width: 160rem) {
+    padding: 2.5rem;
+  }
 }
 
 .title {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+
+  @media (min-width: 90rem) {
+    font-size: 1.75rem;
+  }
+
+  @media (min-width: 160rem) {
+    font-size: 2rem;
+  }
 }
 
 .description {
   font-size: 1rem;
   opacity: 0.8;
+
+  @media (min-width: 90rem) {
+    font-size: 1.125rem;
+  }
+
+  @media (min-width: 160rem) {
+    font-size: 1.25rem;
+  }
 }
