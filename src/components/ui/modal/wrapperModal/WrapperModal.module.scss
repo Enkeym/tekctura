@@ -55,6 +55,7 @@
 }
 
 @media (max-width: 37.5rem) {
+  // 600px
   .modal {
     max-height: 95vh;
     padding: 1.25rem;
@@ -62,10 +63,26 @@
   }
 }
 
+@media (min-width: 120rem) {
+  // 1920px
+  .modal {
+    max-width: 62.5rem; // 1000px
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 160rem) {
+  // 2560px
+  .modal {
+    max-width: 75rem; // 1200px
+    font-size: 1.25rem;
+  }
+}
+
 @media (min-width: 240rem) {
   // 3840px
   .modal {
-    max-width: 45rem;
+    max-width: 87.5rem; // 1400px
     font-size: 1.375rem;
   }
 }
@@ -73,7 +90,7 @@
 @media (min-width: 320rem) {
   // 5120px
   .modal {
-    max-width: 50rem;
+    max-width: 100rem; // 1600px
     font-size: 1.5rem;
   }
 }
