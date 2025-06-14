@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect } from "react"
-import styles from "./WrapperModal.module.scss"
 import { IoClose } from "react-icons/io5"
+import styles from "./WrapperModal.module.scss"
 
 interface ModalWrapperProps {
   isOpen: boolean

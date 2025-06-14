@@ -14,8 +14,11 @@
   position: relative;
 
   @media (max-width: 760px) {
+    flex-wrap: wrap;
     justify-content: center;
-    height: 12vh;
+    height: auto;
+    padding: 1.5rem;
+    gap: 1rem;
   }
 }
 
@@ -32,6 +35,11 @@
   &:focus {
     transform: scale(1.05);
   }
+
+  @media (max-width: 760px) {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .tickerWrapper {
@@ -41,6 +49,7 @@
   padding: 1rem 0;
 
   @media (max-width: 760px) {
-    display: none;
+    width: 100%;
+    order: 2;
   }
 }

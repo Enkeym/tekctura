@@ -38,9 +38,6 @@ export const SingleSlide = ({ slide }: Props) => {
             src={preview.src}
             alt={title}
             kind={preview.kind}
-            fill={false}
-            width={800}
-            height={450}
             priority={false}
           />
           {media.length > 1 && (

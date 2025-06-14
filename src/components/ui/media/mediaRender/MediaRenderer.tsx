@@ -3,63 +3,48 @@
 import Image from "next/image"
 import { memo } from "react"
 import { ClientOnly } from "./ClientOnly"
+import styles from "./MediaRenderer.module.scss"
 
 interface MediaRendererProps {
   src: string
   alt: string
   kind: "image" | "animation"
   className?: string
-  width?: number
-  height?: number
-  fill?: boolean
   priority?: boolean
 }
 
 export const MediaRenderer = memo(
-  ({
-    src,
-    alt,
-    kind,
-    className,
-    width,
-    height,
-    fill = false,
-    priority = false
-  }: MediaRendererProps) => {
-    if (kind === "animation") {
-      return (
-        <ClientOnly>
-          <video
-            src={src}
-            controls={false}
-            disablePictureInPicture
-            controlsList="nodownload noplaybackrate nofullscreen"
-            autoPlay
-            muted
-            loop
-            playsInline
-            width={!fill ? width ?? 800 : undefined}
-            height={!fill ? height ?? 450 : undefined}
-            preload="metadata"
-            aria-label={alt}
-            className={className}
-          />
-        </ClientOnly>
-      )
-    }
-
+  ({ src, alt, kind, className, priority = false }: MediaRendererProps) => {
     return (
-      <Image
-        src={src}
-        alt={alt}
-        className={className}
-        width={!fill ? width ?? 800 : undefined}
-        height={!fill ? height ?? 450 : undefined}
-        fill={fill}
-        loading={priority ? "eager" : "lazy"}
-        priority={priority}
-        sizes="(max-width: 768px) 100vw, 50vw"
-      />
+      <div className={`${styles.wrapper} ${className ?? ""}`}>
+        {kind === "animation" ? (
+          <ClientOnly>
+            <video
+              src={src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={alt}
+              className={styles.media}
+              controls={false}
+              disablePictureInPicture
+              controlsList="nodownload noplaybackrate nofullscreen"
+            />
+          </ClientOnly>
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className={styles.media}
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+          />
+        )}
+      </div>
     )
   }
 )

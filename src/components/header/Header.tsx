@@ -1,7 +1,7 @@
 "use client"
 
 import { Logo } from "../logo/Logo"
-import { Ticker } from "../ticker/Ticker"
+import { TickerWrapper } from "../ticker/TickerWrapper"
 import styles from "./Header.module.scss"
 
 export const Header = () => {
@@ -12,7 +12,7 @@ export const Header = () => {
       </div>
 
       <div className={styles.tickerWrapper} aria-hidden="true">
-        <Ticker />
+        <TickerWrapper />
       </div>
     </header>
   )
