@@ -57,7 +57,6 @@ export const Slider = () => {
                 alt={current.title}
                 className={styles.media}
                 priority={active === 0}
-                fill
               />
               <MediaDots activeIndex={active} total={slides.length} />
             </motion.div>

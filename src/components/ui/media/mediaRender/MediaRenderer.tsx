@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { memo } from "react"
-import { ClientOnly } from "./ClientOnly"
+import { useInView } from "react-intersection-observer"
 import styles from "./MediaRenderer.module.scss"
 
 interface MediaRendererProps {
@@ -15,35 +15,40 @@ interface MediaRendererProps {
 
 export const MediaRenderer = memo(
   ({ src, alt, kind, className, priority = false }: MediaRendererProps) => {
+    const { ref, inView } = useInView({
+      triggerOnce: true,
+      threshold: 0.1,
+      rootMargin: "100px"
+    })
+
     return (
-      <div className={`${styles.wrapper} ${className ?? ""}`}>
-        {kind === "animation" ? (
-          <ClientOnly>
+      <div ref={ref} className={`${styles.wrapper} ${className ?? ""}`}>
+        {inView &&
+          (kind === "animation" ? (
             <video
               src={src}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               aria-label={alt}
               className={styles.media}
               controls={false}
               disablePictureInPicture
               controlsList="nodownload noplaybackrate nofullscreen"
             />
-          </ClientOnly>
-        ) : (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className={styles.media}
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-          />
-        )}
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className={styles.media}
+              priority={priority}
+              loading={priority ? "eager" : "lazy"}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+            />
+          ))}
       </div>
     )
   }
