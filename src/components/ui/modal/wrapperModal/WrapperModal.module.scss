@@ -61,6 +61,12 @@
     max-height: 95vh;
     font-size: 0.95rem;
   }
+
+  .close {
+    font-size: 1.5rem;
+    top: 0;
+    right: 0;
+  }
 }
 
 @media (min-width: 120rem) {

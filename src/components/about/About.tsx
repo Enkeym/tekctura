@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Button } from "../ui/button/Button"
 
-import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
 import { CustomVideoPlayer } from "../ui/media/video/CustomVideoPlayer"
+import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
 
 export const About = () => {
   const [isOpen, setIsOpen] = useState(false)
