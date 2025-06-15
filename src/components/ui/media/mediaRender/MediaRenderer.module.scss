@@ -14,15 +14,3 @@
   object-fit: cover;
   display: block;
 }
-
-@media (max-width: 768px) {
-  .wrapper {
-    aspect-ratio: 4 / 3;
-  }
-}
-
-@media (min-width: 2560px) {
-  .wrapper {
-    aspect-ratio: 21 / 9;
-  }
-}

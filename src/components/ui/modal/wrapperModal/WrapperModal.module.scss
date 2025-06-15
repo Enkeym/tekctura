@@ -13,7 +13,7 @@
 .modal {
   position: relative;
   width: 100%;
-  max-width: 50rem;
+  max-width: 35rem;
   max-height: 90vh;
 
   background: #111;
@@ -52,51 +52,5 @@
 
   &:hover {
     opacity: 0.6;
-  }
-}
-
-@media (max-width: 37.5rem) {
-  // 600px
-  .modal {
-    max-height: 95vh;
-    font-size: 0.95rem;
-  }
-
-  .close {
-    font-size: 1.5rem;
-    top: 0;
-    right: 0;
-  }
-}
-
-@media (min-width: 120rem) {
-  // 1920px
-  .modal {
-    max-width: 62.5rem; // 1000px
-    font-size: 1.125rem;
-  }
-}
-
-@media (min-width: 160rem) {
-  // 2560px
-  .modal {
-    max-width: 75rem; // 1200px
-    font-size: 1.25rem;
-  }
-}
-
-@media (min-width: 240rem) {
-  // 3840px
-  .modal {
-    max-width: 87.5rem; // 1400px
-    font-size: 1.375rem;
-  }
-}
-
-@media (min-width: 320rem) {
-  // 5120px
-  .modal {
-    max-width: 100rem; // 1600px
-    font-size: 1.5rem;
   }
 }
