@@ -2,6 +2,7 @@
 
 import { motion, useAnimation } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import { useInView } from "react-intersection-observer"
 import styles from "./logo.module.scss"
 import { d1, d2 } from "./path"
 
@@ -15,6 +16,11 @@ export const Logo = () => {
   const glitchInterval = useRef<NodeJS.Timeout | null>(null)
   const glitchTimeout = useRef<NodeJS.Timeout | null>(null)
   const controlsSplitBottom = useAnimation()
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  })
 
   const startGlitch = () => {
     controlsBase.start({
@@ -50,6 +56,8 @@ export const Logo = () => {
   }
 
   useEffect(() => {
+    if (!inView) return
+
     if (hovered) {
       glitchTimeout.current = setTimeout(() => {
         startGlitch()
@@ -76,7 +84,7 @@ export const Logo = () => {
       if (glitchTimeout.current) clearTimeout(glitchTimeout.current)
       if (glitchInterval.current) clearInterval(glitchInterval.current)
     }
-  }, [hovered])
+  }, [hovered, inView])
 
   const renderLayer = (color: string, controls: any) => (
     <>
@@ -107,6 +115,7 @@ export const Logo = () => {
 
   return (
     <svg
+      ref={ref}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 2000 440"
       className={styles.logoSvg}

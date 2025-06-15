@@ -23,11 +23,19 @@ export const SingleSlide = ({ slide }: Props) => {
   const preview = media[activeMedia]
 
   return (
-    <motion.div className={styles.card} layout ref={localRef}>
+    <motion.div
+      className={styles.card}
+      layout
+      ref={localRef}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={title}
+    >
       <AnimatePresence mode="wait">
-        <motion.div
+        <motion.figure
           className={styles.imageWrapper}
           key={activeMedia}
+          layoutId={`slide-media-${activeMedia}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -36,19 +44,24 @@ export const SingleSlide = ({ slide }: Props) => {
           <MediaRenderer
             className={styles.image}
             src={preview.src}
-            alt={title}
+            alt={`${title} — слайд ${activeMedia + 1}`}
             kind={preview.kind}
             priority={false}
           />
           {media.length > 1 && (
             <MediaDots activeIndex={activeMedia} total={media.length} />
           )}
-        </motion.div>
+        </motion.figure>
       </AnimatePresence>
 
       <div className={styles.text}>
         <h2 className={styles.title}>{title}</h2>
-        <motion.p className={styles.description} layout aria-expanded="true">
+        <motion.p
+          className={styles.description}
+          layout
+          aria-expanded="true"
+          tabIndex={0}
+        >
           {description}
         </motion.p>
       </div>

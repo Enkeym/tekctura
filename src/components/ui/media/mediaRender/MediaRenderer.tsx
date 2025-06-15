@@ -21,10 +21,12 @@ export const MediaRenderer = memo(
       rootMargin: "100px"
     })
 
-    return (
-      <div ref={ref} className={`${styles.wrapper} ${className ?? ""}`}>
-        {inView &&
-          (kind === "animation" ? (
+    const wrapperClass = `${styles.wrapper} ${className ?? ""}`
+
+    if (kind === "animation") {
+      return (
+        <div ref={ref} className={wrapperClass}>
+          {inView && (
             <video
               src={src}
               autoPlay
@@ -38,17 +40,22 @@ export const MediaRenderer = memo(
               disablePictureInPicture
               controlsList="nodownload noplaybackrate nofullscreen"
             />
-          ) : (
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              className={styles.media}
-              priority={priority}
-              loading={priority ? "eager" : "lazy"}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-            />
-          ))}
+          )}
+        </div>
+      )
+    }
+
+    return (
+      <div className={wrapperClass}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className={styles.media}
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+        />
       </div>
     )
   }
