@@ -44,5 +44,96 @@ export const slides: Slide[] = [
         kind: "image"
       }
     ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
+  },
+  {
+    title: "АРТ",
+    description:
+      "Серия визуальных и сценографических решений, разработанных для живого выступления. Синтез света, движения и архитектуры пространства.",
+    media: [
+      { src: "/assets/images/art/ART_00001_1.jpg", kind: "image" },
+      { src: "/assets/images/art/ART_00012_HiLG3qS.jpg", kind: "image" },
+      {
+        src: "/assets/images/SOF_8434.jpg",
+        kind: "image"
+      }
+    ]
   }
 ]

@@ -39,7 +39,7 @@ export const GalleryItem = ({ slide, onClick }: Props) => {
           kind={preview.kind}
           className={styles.image}
         />
-        <h3 className={styles.title}>{slide.title}</h3>
+        <h3 className={styles.title}>{slide.title.toUpperCase()}</h3>
       </div>
     </motion.article>
   )
