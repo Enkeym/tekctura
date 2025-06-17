@@ -68,7 +68,7 @@ export const Slider = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h2>{current.title}</h2>
+              <h3>{current.title.toUpperCase()}</h3>
             </motion.figcaption>
           </motion.figure>
         </AnimatePresence>

@@ -28,7 +28,7 @@ export const Ticker = () => {
   const [loopWidth, setLoopWidth] = useState(0)
 
   // Сохраняем текущую скорость отдельно
-  const defaultVelocity = 150
+  const defaultVelocity = 90
   const velocityRef = useRef(defaultVelocity)
 
   useLayoutEffect(() => {
