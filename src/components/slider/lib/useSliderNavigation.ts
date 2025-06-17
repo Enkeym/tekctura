@@ -14,11 +14,11 @@ export const useSliderNavigation = ({
   throttleMs = 1000
 }: Params) => {
   const [active, setActive] = useState(0)
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const touchStartX = useRef(0)
   const touchStartTarget = useRef<HTMLElement | null>(null)
 
-  // --- Утилита: Проверка на прокручиваемость ---
   const isScrollable = (el: HTMLElement): boolean =>
     el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth
 
@@ -30,7 +30,6 @@ export const useSliderNavigation = ({
     return null
   }
 
-  // --- Смена слайда с контролем по таймеру ---
   const changeSlide = useCallback(
     (delta: number) => {
       setActive((prev) => (prev + delta + length) % length)
@@ -49,6 +48,15 @@ export const useSliderNavigation = ({
     [changeSlide, throttleMs]
   )
 
+  const goNext = useCallback(
+    () => throttleSlideChange(1),
+    [throttleSlideChange]
+  )
+  const goPrev = useCallback(
+    () => throttleSlideChange(-1),
+    [throttleSlideChange]
+  )
+
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -56,10 +64,7 @@ export const useSliderNavigation = ({
     const onWheel = (e: WheelEvent) => {
       const target = e.target as HTMLElement
       const scrollable = findScrollableParent(target)
-      if (scrollable && scrollable !== el) {
-        return
-      }
-
+      if (scrollable && scrollable !== el) return
       throttleSlideChange(e.deltaY > 0 ? 1 : -1)
     }
 
@@ -71,9 +76,7 @@ export const useSliderNavigation = ({
     const onTouchEnd = (e: TouchEvent) => {
       const deltaX = e.changedTouches[0].clientX - touchStartX.current
       if (Math.abs(deltaX) > swipeThreshold) {
-        if (touchStartTarget.current && touchStartTarget.current !== el) {
-          return
-        }
+        if (touchStartTarget.current && touchStartTarget.current !== el) return
         throttleSlideChange(deltaX < 0 ? 1 : -1)
       }
     }
@@ -90,6 +93,9 @@ export const useSliderNavigation = ({
   }, [containerRef, swipeThreshold, throttleSlideChange])
 
   return {
-    active
+    active,
+    setActive,
+    goNext,
+    goPrev
   }
 }

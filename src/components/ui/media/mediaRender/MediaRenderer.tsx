@@ -54,6 +54,8 @@ export const MediaRenderer = memo(
           className={styles.media}
           priority={priority}
           loading={priority ? "eager" : "lazy"}
+          draggable={true}
+          unselectable="on"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
         />
       </div>

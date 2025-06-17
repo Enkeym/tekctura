@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { slides } from "../gallery/data"
 import { MediaDots } from "../ui/media/mediaDots/mediaDots"
 import { MediaRenderer } from "../ui/media/mediaRender/MediaRenderer"
@@ -10,17 +10,27 @@ import { useSliderNavigation } from "./lib/useSliderNavigation"
 import { SingleSlide } from "./singleSlide/SingleSlide"
 import styles from "./Slider.module.scss"
 
+function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T | undefined>(undefined)
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref.current
+}
+
 export const Slider = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const sliderRef = useRef<HTMLElement | null>(null)
+  const isDragging = useRef(false)
 
-  const { active } = useSliderNavigation({
+  const { active, setActive, goNext, goPrev } = useSliderNavigation({
     length: slides.length,
     containerRef: sliderRef
   })
 
   const current = slides[active]
   const preview = current.media[0]
+  const prevActive = usePrevious(active)
 
   return (
     <>
@@ -29,49 +39,93 @@ export const Slider = () => {
         className={styles.slider}
         aria-label="Примеры проектов студии"
         role="region"
-        onClick={() => setModalOpen(true)}
         tabIndex={0}
+        onClick={() => {
+          if (isDragging.current) return
+          setModalOpen(true)
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") setModalOpen(true)
+          if (e.key === "ArrowRight") goNext()
+          if (e.key === "ArrowLeft") goPrev()
         }}
       >
-        <AnimatePresence mode="wait">
-          <motion.figure
-            key={active}
-            className={styles.slide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              className={styles.imageWrapper}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
+        <AnimatePresence mode="sync" initial={false}>
+          {typeof prevActive === "number" && prevActive !== active && (
+            <figure
+              className={styles.slide}
+              key={`prev-${prevActive}`}
+              style={{ zIndex: 1 }}
             >
+              <div className={styles.imageWrapper}>
+                <MediaRenderer
+                  kind={slides[prevActive].media[0].kind}
+                  src={slides[prevActive].media[0].src}
+                  alt={slides[prevActive].title}
+                  className={styles.media}
+                />
+                <MediaDots activeIndex={active} total={slides.length} />
+              </div>
+              <figcaption className={styles.caption}>
+                <h3>{slides[prevActive].title.toUpperCase()}</h3>
+              </figcaption>
+            </figure>
+          )}
+
+          <motion.figure
+            key={`motion-${active}`}
+            className={styles.slide}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{}}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            style={{
+              zIndex: 2,
+              cursor: "grab",
+              pointerEvents: "auto"
+            }}
+            drag="x"
+            dragElastic={0.2}
+            dragSnapToOrigin
+            onDragStart={() => {
+              isDragging.current = true
+            }}
+            onDragEnd={(_, info) => {
+              const swipePower = Math.abs(info.offset.x) * info.velocity.x
+
+              if (swipePower < -1000) {
+                goNext()
+              } else if (swipePower > 1000) {
+                goPrev()
+              }
+
+              setTimeout(() => {
+                isDragging.current = false
+              }, 50)
+            }}
+          >
+            <div className={styles.imageWrapper}>
               <MediaRenderer
                 kind={preview.kind}
                 src={preview.src}
                 alt={current.title}
                 className={styles.media}
-                priority={active === 0}
+                priority={true}
               />
-              <MediaDots activeIndex={active} total={slides.length} />
-            </motion.div>
+            </div>
+
             <motion.figcaption
-              key={current.title}
               className={styles.caption}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
             >
               <h3>{current.title.toUpperCase()}</h3>
             </motion.figcaption>
           </motion.figure>
         </AnimatePresence>
+
+        <MediaDots activeIndex={active} total={slides.length} />
       </section>
 
       <WrapperModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>

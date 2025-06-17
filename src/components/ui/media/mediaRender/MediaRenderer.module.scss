@@ -13,4 +13,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
+
+  pointer-events: none;
+  touch-action: pan-y;
+  user-select: none;
 }
