@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 760px) {
+    height: 75vh;
+  }
 }
 
 .slide {

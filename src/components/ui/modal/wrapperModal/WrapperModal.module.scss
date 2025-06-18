@@ -15,18 +15,16 @@
   width: 100%;
   max-width: 50rem;
   max-height: 90vh;
-
   background: #111;
-  color: #fff;
+  color: #ffffffb8;
   border-radius: 0.75rem;
   box-shadow: 0 1.875rem 5rem rgba(0, 0, 0, 0.6);
-
   overflow-y: auto;
   overflow-x: hidden;
-
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin: 1rem;
   font-size: 1rem;
+  text-align: justify;
 }
