@@ -1,6 +1,6 @@
-import { slides } from "./data"
+import { slides } from "@/entities/gallery/slides"
 
-import { GalleryItem } from "./galleryItem/GalleryItem"
+import { GalleryItem } from "./GalleryItem"
 
 interface GalleryProps {
   onSelectSlide: (index: number) => void

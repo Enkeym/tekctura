@@ -1,22 +1,17 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
-import { slides } from "../gallery/data"
-import { MediaDots } from "../ui/media/mediaDots/mediaDots"
-import { MediaRenderer } from "../ui/media/mediaRender/MediaRenderer"
-import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
+import { useRef, useState } from "react"
+import { slides } from "@/entities/gallery/slides"
+import { MediaDots } from "@/shared/ui/media/mediaDots/mediaDots"
+import { MediaRenderer } from "@/shared/ui/media/mediaRender/MediaRenderer"
+import WrapperModal from "@/shared/ui/modal/wrapperModal/WrapperModal"
 import { useSliderNavigation } from "./lib/useSliderNavigation"
 import { SingleSlide } from "./singleSlide/SingleSlide"
+import { slideInRight } from "@/shared/animations/slideIn"
+import { captionFade } from "@/shared/animations/captionFade"
+import { usePrevious } from "@/shared/lib/usePrevious"
 
-
-function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T | undefined>(undefined)
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-  return ref.current
-}
 
 export const Slider = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -77,10 +72,7 @@ export const Slider = () => {
           <motion.figure
             key={`motion-${active}`}
             className="absolute inset-0 touch-pan-y select-none will-change-transform"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{}}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            {...slideInRight}
             style={{
               zIndex: 2,
               cursor: "grab",
@@ -118,9 +110,7 @@ export const Slider = () => {
 
             <motion.figcaption
               className="absolute bottom-6 left-9 max-w-[80%] text-white drop-shadow-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
+              {...captionFade}
             >
               <h3 className="text-xl font-bold leading-tight">
                 {current.title.toUpperCase()}

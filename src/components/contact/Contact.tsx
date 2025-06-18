@@ -1,4 +1,4 @@
-import { TriggerModal } from "@/components/ui/modal/triggerModal/TriggerModal"
+import { TriggerModal } from "@/shared/ui/modal/triggerModal/TriggerModal"
 import { useRef, useState } from "react"
 import { IMaskInput } from "react-imask"
 

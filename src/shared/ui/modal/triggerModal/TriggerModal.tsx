@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button/Button"
+import { Button } from "@/shared/ui/button/Button"
 import React, { useEffect, useState } from "react"
 import { ContentModal } from "../contentModal/ContentModal"
 import WrapperModal from "../wrapperModal/WrapperModal"

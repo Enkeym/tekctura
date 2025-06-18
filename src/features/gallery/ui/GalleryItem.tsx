@@ -1,8 +1,9 @@
 // galleryItem/GalleryItem.tsx
-import { MediaRenderer } from "@/components/ui/media/mediaRender/MediaRenderer"
+import { MediaRenderer } from "@/shared/ui/media/mediaRender/MediaRenderer"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Slide } from "../types/slide"
+import { Slide } from "@/entities/gallery/types"
+import { fadeIn } from "@/shared/animations/fade"
 
 
 interface Props {
@@ -27,9 +28,9 @@ export const GalleryItem = ({ slide, onClick }: Props) => {
       role="button"
       tabIndex={0}
       aria-label={`Открыть слайд: ${slide.title}`}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      initial={fadeIn.initial}
+      animate={inView ? fadeIn.animate : {}}
+      transition={fadeIn.transition}
       whileHover={{ scale: 1.02 }}
     >
       <div className="relative h-full w-full">

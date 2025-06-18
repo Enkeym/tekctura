@@ -1,20 +1,14 @@
 "use client"
 
-import { Slide } from "@/components/gallery/types/slide"
-import { MediaDots } from "@/components/ui/media/mediaDots/mediaDots"
-import { MediaRenderer } from "@/components/ui/media/mediaRender/MediaRenderer"
+import { Slide } from "@/entities/gallery/types"
+import { MediaDots } from "@/shared/ui/media/mediaDots/mediaDots"
+import { MediaRenderer } from "@/shared/ui/media/mediaRender/MediaRenderer"
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { useSliderNavigation } from "../lib/useSliderNavigation"
-
-
-function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T | undefined>(undefined)
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-  return ref.current
-}
+import { slideInRight } from "@/shared/animations/slideIn"
+import { captionFade } from "@/shared/animations/captionFade"
+import { usePrevious } from "@/shared/lib/usePrevious"
 
 interface Props {
   slide: Slide
@@ -66,10 +60,7 @@ export const SingleSlide = ({ slide }: Props) => {
           <motion.figure
             key={`motion-${activeMedia}`}
             className="absolute inset-0 flex flex-col items-center justify-center"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{}}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            {...slideInRight}
             style={{ zIndex: 2, cursor: "grab", touchAction: "pan-y" }}
             drag="x"
             dragElastic={0.2}
@@ -100,9 +91,7 @@ export const SingleSlide = ({ slide }: Props) => {
           </motion.figure>
           <motion.figcaption
             className="absolute left-8 top-6 z-10 max-w-[80%] pr-4 text-white drop-shadow-md md:left-4 md:top-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
+            {...captionFade}
           >
             <h3 className="m-0 font-bold leading-[1.2] md:text-lg">{title.toUpperCase()}</h3>
           </motion.figcaption>
