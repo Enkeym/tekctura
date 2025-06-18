@@ -1,8 +1,8 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect } from "react"
-import { IoClose } from "react-icons/io5"
+import { useEffect, useRef } from "react"
+import { ButtonCLose } from "../../button/buttonClose/ButtonCLose"
 import styles from "./WrapperModal.module.scss"
 
 interface ModalWrapperProps {
@@ -12,6 +12,8 @@ interface ModalWrapperProps {
 }
 
 const WrapperModal = ({ children, isOpen, onClose }: ModalWrapperProps) => {
+  const backdropRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
@@ -25,6 +27,7 @@ const WrapperModal = ({ children, isOpen, onClose }: ModalWrapperProps) => {
       {isOpen && (
         <motion.div
           className={styles.overlay}
+          ref={backdropRef}
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) onClose()
           }}
@@ -40,13 +43,7 @@ const WrapperModal = ({ children, isOpen, onClose }: ModalWrapperProps) => {
             exit={{ y: 60, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
           >
-            <button
-              className={styles.close}
-              onClick={onClose}
-              aria-label="Закрыть"
-            >
-              <IoClose />
-            </button>
+            <ButtonCLose onClose={onClose} />
             {children}
           </motion.div>
         </motion.div>

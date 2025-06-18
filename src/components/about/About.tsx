@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "../ui/button/Button"
+import { Button } from "../ui/button/buttonModal/Button"
 
 import { CustomVideoPlayer } from "../ui/media/video/CustomVideoPlayer"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"

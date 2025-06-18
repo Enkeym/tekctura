@@ -106,11 +106,12 @@ export const Slider = () => {
           >
             <div className={styles.imageWrapper}>
               <MediaRenderer
+                key={`${preview.src}-${active}`}
                 kind={preview.kind}
                 src={preview.src}
                 alt={current.title}
                 className={styles.media}
-                priority={true}
+                priority={active === 0}
               />
             </div>
 
