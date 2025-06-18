@@ -9,11 +9,16 @@
 }
 
 .modal {
-  background: white;
+  position: relative;
+  background: #111;
   padding: 2rem;
   border-radius: 1rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   outline: none;
+  display: flex;
+  flex-direction: column;
 }

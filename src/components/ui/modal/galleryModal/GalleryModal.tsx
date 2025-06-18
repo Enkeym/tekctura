@@ -40,7 +40,6 @@ export const GalleryModal = ({
           aria-modal="true"
           tabIndex={-1}
         >
-          <ButtonCLose onClose={onClose} />
           <motion.div
             className={styles.modal}
             initial={{ scale: 0.95, opacity: 0 }}
@@ -48,6 +47,7 @@ export const GalleryModal = ({
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
+            <ButtonCLose onClose={onClose} />
             {children}
           </motion.div>
         </motion.div>

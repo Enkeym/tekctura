@@ -6,6 +6,8 @@
   flex-direction: column;
   background: #111;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 20rem;
+  height: 20rem;
 
   &:hover {
     transform: scale(1.02);

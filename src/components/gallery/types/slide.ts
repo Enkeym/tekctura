@@ -1,5 +1,6 @@
 export interface Slide {
   title: string
+  category: "All" | "LES" | "ART" | "PERFORMANSE" | "TV"
   description: string
   media: SlideMedia[]
 }
