@@ -3,7 +3,7 @@
 import { motion, useAnimation } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { useInView } from "react-intersection-observer"
-import styles from "./logo.module.scss"
+
 import { d1, d2 } from "./path"
 
 export const Logo = () => {
@@ -118,7 +118,7 @@ export const Logo = () => {
       ref={ref}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 2000 440"
-      className={styles.logoSvg}
+      className="block h-auto w-64 max-w-full cursor-[url('/fuck.svg'),_auto] bg-black"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >

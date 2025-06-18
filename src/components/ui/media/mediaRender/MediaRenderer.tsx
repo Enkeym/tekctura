@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { memo } from "react"
 import { useInView } from "react-intersection-observer"
-import styles from "./MediaRenderer.module.scss"
+
 
 interface MediaRendererProps {
   src: string
@@ -21,7 +21,7 @@ export const MediaRenderer = memo(
       rootMargin: "100px"
     })
 
-    const wrapperClass = `${styles.wrapper} ${className ?? ""}`
+    const wrapperClass = `relative w-full overflow-hidden bg-black [aspect-ratio:16/9] ${className ?? ""}`
 
     if (kind === "animation") {
       return (
@@ -35,7 +35,7 @@ export const MediaRenderer = memo(
               playsInline
               preload="none"
               aria-label={alt}
-              className={styles.media}
+              className="absolute inset-0 block h-full w-full object-cover touch-pan-y select-none"
               controls={false}
               disablePictureInPicture
               controlsList="nodownload noplaybackrate nofullscreen"
@@ -51,7 +51,7 @@ export const MediaRenderer = memo(
           src={src}
           alt={alt}
           fill
-          className={styles.media}
+          className="absolute inset-0 block h-full w-full object-cover touch-pan-y select-none"
           priority={priority}
           loading={priority ? "eager" : "lazy"}
           draggable={true}

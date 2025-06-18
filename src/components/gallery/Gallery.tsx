@@ -1,5 +1,5 @@
 import { slides } from "./data"
-import styles from "./Gallery.module.scss"
+
 import { GalleryItem } from "./galleryItem/GalleryItem"
 
 interface GalleryProps {
@@ -7,7 +7,7 @@ interface GalleryProps {
 }
 
 export const Gallery = ({ onSelectSlide }: GalleryProps) => (
-  <section className={styles.grid}>
+  <section className="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-2 overflow-hidden md:overflow-auto">
     {slides.map((slide, index) => (
       <GalleryItem
         key={slide.title}

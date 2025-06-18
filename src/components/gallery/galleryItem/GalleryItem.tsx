@@ -3,7 +3,7 @@ import { MediaRenderer } from "@/components/ui/media/mediaRender/MediaRenderer"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Slide } from "../types/slide"
-import styles from "./GalleryItem.module.scss"
+
 
 interface Props {
   slide: Slide
@@ -22,7 +22,7 @@ export const GalleryItem = ({ slide, onClick }: Props) => {
   return (
     <motion.article
       ref={ref}
-      className={styles.card}
+      className="flex cursor-pointer flex-col overflow-hidden rounded-xl bg-[#111] transition-transform duration-200 hover:scale-105"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -32,14 +32,16 @@ export const GalleryItem = ({ slide, onClick }: Props) => {
       transition={{ duration: 0.4, ease: "easeOut" }}
       whileHover={{ scale: 1.02 }}
     >
-      <div className={styles.media}>
+      <div className="relative h-full w-full">
         <MediaRenderer
           src={preview.src}
           alt={slide.title}
           kind={preview.kind}
-          className={styles.image}
+          className="h-full w-full object-cover"
         />
-        <h3 className={styles.title}>{slide.title.toUpperCase()}</h3>
+        <h3 className="absolute left-4 right-4 top-4 max-w-[90%] break-words text-lg font-medium text-white drop-shadow-md">
+          {slide.title.toUpperCase()}
+        </h3>
       </div>
     </motion.article>
   )

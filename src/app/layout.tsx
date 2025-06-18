@@ -1,7 +1,7 @@
 import { Footer } from "@/components/footer/Footer"
 import { Header } from "@/components/header/Header"
 import type { Metadata } from "next"
-import "./fonts.scss"
+import "./fonts.css"
 import "./globals.css"
 
 export const metadata: Metadata = {

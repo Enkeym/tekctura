@@ -8,7 +8,7 @@ import {
   wrap
 } from "framer-motion"
 import { useLayoutEffect, useRef, useState } from "react"
-import styles from "./Ticker.module.scss"
+
 
 const phrases = [
   "технологии",
@@ -54,22 +54,22 @@ export const Ticker = () => {
 
   return (
     <div
-      className={styles.ticker}
+      className="w-full overflow-hidden cursor-pointer [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.8)_5%,#000_15%,#000_85%,rgba(0,0,0,0.8)_95%,transparent_100%)]"
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <motion.div className={styles.tickerIn} style={{ x }}>
-        <div className={styles.loop} ref={loopRef}>
+      <motion.div className="flex whitespace-nowrap" style={{ x }}>
+        <div className="inline-flex gap-[35px]" ref={loopRef}>
           {phrases.map((txt, idx) => (
-            <span className={styles.tickerItem} key={`a-${idx}`}>
+            <span className="whitespace-nowrap uppercase" key={`a-${idx}`}>
               {txt}
             </span>
           ))}
         </div>
-        <div className={styles.loop}>
+        <div className="inline-flex gap-[35px]">
           {phrases.map((txt, idx) => (
-            <span className={styles.tickerItem} key={`b-${idx}`}>
+            <span className="whitespace-nowrap uppercase" key={`b-${idx}`}>
               {txt}
             </span>
           ))}

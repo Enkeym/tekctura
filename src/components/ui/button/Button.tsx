@@ -1,5 +1,5 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react"
-import styles from "./Button.module.scss"
+
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -7,7 +7,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = ({ children, ...props }: ButtonProps) => {
   return (
-    <button className={styles.button} {...props}>
+    <button
+      className="uppercase transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-60"
+      {...props}
+    >
       {children}
     </button>
   )

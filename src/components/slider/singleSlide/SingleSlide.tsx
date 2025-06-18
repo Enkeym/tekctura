@@ -6,7 +6,7 @@ import { MediaRenderer } from "@/components/ui/media/mediaRender/MediaRenderer"
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef } from "react"
 import { useSliderNavigation } from "../lib/useSliderNavigation"
-import styles from "./SingleSlide.module.scss"
+
 
 function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T | undefined>(undefined)
@@ -38,18 +38,21 @@ export const SingleSlide = ({ slide }: Props) => {
   const current = media[activeMedia]
 
   return (
-    <motion.div className={styles.card} ref={localRef}>
-      <div className={styles.mediaContainer}>
+    <motion.div
+      className="relative mx-auto flex w-full max-w-[50rem] flex-col overflow-hidden rounded-xl bg-[#111] text-white"
+      ref={localRef}
+    >
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
         <AnimatePresence mode="sync" initial={false}>
           {typeof prevActiveMedia === "number" &&
             prevActiveMedia !== activeMedia && (
               <figure
-                className={styles.imageWrapper}
+                className="absolute inset-0 flex flex-col items-center justify-center"
                 key={`prev-${prevActiveMedia}`}
                 style={{ zIndex: 1 }}
               >
                 <MediaRenderer
-                  className={styles.image}
+                  className="h-full w-full object-cover"
                   src={media[prevActiveMedia].src}
                   alt={`${title} — слайд ${prevActiveMedia + 1}`}
                   kind={media[prevActiveMedia].kind}
@@ -62,7 +65,7 @@ export const SingleSlide = ({ slide }: Props) => {
 
           <motion.figure
             key={`motion-${activeMedia}`}
-            className={styles.imageWrapper}
+            className="absolute inset-0 flex flex-col items-center justify-center"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{}}
@@ -85,7 +88,7 @@ export const SingleSlide = ({ slide }: Props) => {
             }}
           >
             <MediaRenderer
-              className={styles.image}
+              className="h-full w-full object-cover"
               src={current.src}
               alt={`${title} — слайд ${activeMedia + 1}`}
               kind={current.kind}
@@ -96,18 +99,18 @@ export const SingleSlide = ({ slide }: Props) => {
             )}
           </motion.figure>
           <motion.figcaption
-            className={styles.caption}
+            className="absolute left-8 top-6 z-10 max-w-[80%] pr-4 text-white drop-shadow-md md:left-4 md:top-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
           >
-            <h3 className={styles.title}>{title.toUpperCase()}</h3>
+            <h3 className="m-0 font-bold leading-[1.2] md:text-lg">{title.toUpperCase()}</h3>
           </motion.figcaption>
         </AnimatePresence>
       </div>
 
-      <div className={styles.text}>
-        <motion.p className={styles.description} layout>
+      <div className="p-6">
+        <motion.p className="max-h-28 overflow-y-auto text-base opacity-80" layout>
           {description}
         </motion.p>
       </div>
