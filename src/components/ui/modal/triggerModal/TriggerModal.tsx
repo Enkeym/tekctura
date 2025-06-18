@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button/Button"
 import React, { useEffect, useState } from "react"
 import { ContentModal } from "../contentModal/ContentModal"
 import WrapperModal from "../wrapperModal/WrapperModal"
-import styles from "./TriggerModal.module.scss"
+
 
 interface TriggerModalProps {
   buttonLabel?: string
@@ -29,7 +29,10 @@ export const TriggerModal = ({
 
   return (
     <>
-      <Button className={styles.triggerButton} onClick={() => setIsOpen(true)}>
+      <Button
+        className="transition-transform duration-300 hover:scale-105 hover:opacity-75 focus:scale-105 focus:opacity-75"
+        onClick={() => setIsOpen(true)}
+      >
         {buttonLabel}
       </Button>
       <WrapperModal isOpen={isOpen} onClose={() => setIsOpen(false)}>

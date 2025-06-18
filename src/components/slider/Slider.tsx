@@ -8,7 +8,7 @@ import { MediaRenderer } from "../ui/media/mediaRender/MediaRenderer"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
 import { useSliderNavigation } from "./lib/useSliderNavigation"
 import { SingleSlide } from "./singleSlide/SingleSlide"
-import styles from "./Slider.module.scss"
+
 
 function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T | undefined>(undefined)
@@ -36,7 +36,7 @@ export const Slider = () => {
     <>
       <section
         ref={sliderRef}
-        className={styles.slider}
+        className="relative flex h-[70vh] w-full items-center justify-center overflow-hidden"
         aria-label="Примеры проектов студии"
         role="region"
         tabIndex={0}
@@ -53,28 +53,30 @@ export const Slider = () => {
         <AnimatePresence mode="sync" initial={false}>
           {typeof prevActive === "number" && prevActive !== active && (
             <figure
-              className={styles.slide}
+              className="absolute inset-0 touch-pan-y select-none will-change-transform"
               key={`prev-${prevActive}`}
               style={{ zIndex: 1 }}
             >
-              <div className={styles.imageWrapper}>
+              <div className="flex flex-col items-center">
                 <MediaRenderer
                   kind={slides[prevActive].media[0].kind}
                   src={slides[prevActive].media[0].src}
                   alt={slides[prevActive].title}
-                  className={styles.media}
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
                 <MediaDots activeIndex={active} total={slides.length} />
               </div>
-              <figcaption className={styles.caption}>
-                <h3>{slides[prevActive].title.toUpperCase()}</h3>
+              <figcaption className="absolute bottom-6 left-9 max-w-[80%] text-white drop-shadow-md">
+                <h3 className="text-xl font-bold leading-tight">
+                  {slides[prevActive].title.toUpperCase()}
+                </h3>
               </figcaption>
             </figure>
           )}
 
           <motion.figure
             key={`motion-${active}`}
-            className={styles.slide}
+            className="absolute inset-0 touch-pan-y select-none will-change-transform"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{}}
@@ -104,23 +106,25 @@ export const Slider = () => {
               }, 50)
             }}
           >
-            <div className={styles.imageWrapper}>
+            <div className="flex flex-col items-center">
               <MediaRenderer
                 kind={preview.kind}
                 src={preview.src}
                 alt={current.title}
-                className={styles.media}
+                className="absolute inset-0 h-full w-full object-cover"
                 priority={true}
               />
             </div>
 
             <motion.figcaption
-              className={styles.caption}
+              className="absolute bottom-6 left-9 max-w-[80%] text-white drop-shadow-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
             >
-              <h3>{current.title.toUpperCase()}</h3>
+              <h3 className="text-xl font-bold leading-tight">
+                {current.title.toUpperCase()}
+              </h3>
             </motion.figcaption>
           </motion.figure>
         </AnimatePresence>
