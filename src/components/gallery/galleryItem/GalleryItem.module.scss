@@ -1,17 +1,16 @@
 .card {
-  border-radius: 1rem;
+  width: 100%;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  background: #111;
+  background: #1b1b1b;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 20rem;
-  height: 20rem;
+  padding: 1rem;
 
   &:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.35);
   }
 }
 

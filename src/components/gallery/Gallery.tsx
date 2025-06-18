@@ -21,7 +21,7 @@ export const Gallery = ({ onSelectSlide }: GalleryProps) => {
   return (
     <section className={styles.gallerySection}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Featured Projects</h2>
+        <h3 className={styles.title}>Featured Projects</h3>
         <nav className={styles.categories}>
           {categories.map((category) => (
             <button
