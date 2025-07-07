@@ -1,35 +1,41 @@
 .ticker {
+  position: relative;
   overflow: hidden;
   cursor: pointer;
   width: 100%;
-  mask-image: linear-gradient(
+  background: white;
+  color: black;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.ticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
     to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.8) 5%,
-    #000 15%,
-    #000 85%,
-    rgba(0, 0, 0, 0.8) 95%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.8) 5%,
-    #000 15%,
-    #000 85%,
-    rgba(0, 0, 0, 0.8) 95%,
-    transparent 100%
+    white 0%,
+    rgba(255, 255, 255, 0.2) 5%,
+    rgba(255, 255, 255, 0) 15%,
+    rgba(255, 255, 255, 0) 85%,
+    rgba(255, 255, 255, 0.2) 95%,
+    white 100%
   );
 }
 
 .tickerIn {
   display: flex;
   white-space: nowrap;
+  will-change: transform;
 }
 
 .loop {
   display: inline-flex;
   gap: 35px;
+  padding-top: 0.2rem;
 }
 
 .tickerItem {

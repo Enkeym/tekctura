@@ -94,8 +94,9 @@ export const Logo = () => {
         initial={{ opacity: 0 }}
         style={{
           fill: color,
-          mixBlendMode: "screen",
-          filter: "blur(0.8px) brightness(1.3)",
+          mixBlendMode: "difference", // или "overlay"
+          filter: "blur(1px) brightness(1.6)",
+          opacity: 0.8,
           pointerEvents: "none"
         }}
       />
@@ -105,8 +106,9 @@ export const Logo = () => {
         initial={{ opacity: 0 }}
         style={{
           fill: color,
-          mixBlendMode: "screen",
-          filter: "blur(0.8px) brightness(1.3)",
+          mixBlendMode: "difference",
+          filter: "blur(1px) brightness(1.6)",
+          opacity: 0.8,
           pointerEvents: "none"
         }}
       />

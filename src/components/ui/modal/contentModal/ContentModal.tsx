@@ -8,7 +8,7 @@ interface ContentModalProps {
 export const ContentModal = ({ title, children }: ContentModalProps) => {
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>{title}</h2>
+      <h3 className={styles.title}>{title}</h3>
       <div className={styles.body}>{children}</div>
     </div>
   )

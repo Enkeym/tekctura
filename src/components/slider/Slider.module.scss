@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  user-select: none;
+  touch-action: none;
 
   @media (max-width: 760px) {
     height: 75vh;
@@ -46,9 +48,6 @@
   padding-right: 1rem;
   padding-bottom: env(safe-area-inset-bottom, 1rem);
   max-width: 80%;
-  font-size: 1.2rem;
-  line-height: 1.4;
-  font-weight: 700;
   word-break: break-word;
   pointer-events: none;
   color: white;
@@ -57,5 +56,20 @@
   @media (max-width: 760px) {
     font-size: 1rem;
     top: 1rem;
+  }
+}
+
+.captionText {
+  font-family: "HeliosExt", sans-serif;
+  font-size: 1.03rem;
+  font-weight: 400;
+  color: inherit;
+  line-height: 1.4;
+  margin: 0;
+  word-break: break-word;
+  text-transform: uppercase;
+
+  @media (max-width: 360px) {
+    font-size: 0.85rem;
   }
 }

@@ -32,6 +32,7 @@ export const useSliderNavigation = ({
 
   const changeSlide = useCallback(
     (delta: number) => {
+      setDirection(delta > 0 ? 1 : -1)
       setActive((prev) => (prev + delta + length) % length)
     },
     [length]
@@ -92,10 +93,13 @@ export const useSliderNavigation = ({
     }
   }, [containerRef, swipeThreshold, throttleSlideChange])
 
+  const [direction, setDirection] = useState<1 | -1>(1)
+
   return {
     active,
     setActive,
     goNext,
-    goPrev
+    goPrev,
+    direction
   }
 }

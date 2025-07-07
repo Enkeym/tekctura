@@ -70,7 +70,7 @@ export const Contact = () => {
   return (
     <TriggerModal
       buttonLabel="НАПИСАТЬ НАМ"
-      titleModal="Написать нам"
+      titleModal="СВЯЗАТЬСЯ С НАМИ"
       onRequestClose={(close) => {
         closeModalRef.current = close
       }}
@@ -106,10 +106,10 @@ export const Contact = () => {
 
         <button type="submit" disabled={status === "loading" || isBlocked}>
           {status === "loading"
-            ? "Отправка..."
+            ? "ОТПРАВКА..."
             : isBlocked
-            ? "Подождите..."
-            : "Отправить"}
+            ? "ПОДОЖДИТЕ..."
+            : "ОТПРАВИТЬ"}
         </button>
 
         {status === "success" && (

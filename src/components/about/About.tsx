@@ -5,13 +5,16 @@ import { Button } from "../ui/button/buttonModal/Button"
 
 import { CustomVideoPlayer } from "../ui/media/video/CustomVideoPlayer"
 import WrapperModal from "../ui/modal/wrapperModal/WrapperModal"
+import styles from "./About.module.scss"
 
 export const About = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>КТО МЫ?</Button>
+      <Button className={styles.aboutBtn} onClick={() => setIsOpen(true)}>
+        КТО МЫ?
+      </Button>
 
       <WrapperModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div

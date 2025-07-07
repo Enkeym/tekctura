@@ -29,7 +29,7 @@ export const Footer = () => {
                 rel="noopener noreferrer"
                 aria-label="Instagram"
               >
-                <CiInstagram />
+                <CiInstagram className={styles.icon} />
               </a>
             </li>
             <li>
@@ -38,7 +38,7 @@ export const Footer = () => {
                 href="mailto:example@mail.com"
                 aria-label="Отправить письмо на email"
               >
-                <CiMail />
+                <CiMail className={styles.icon} />
               </a>
             </li>
             <li>
@@ -49,7 +49,7 @@ export const Footer = () => {
                 rel="noopener noreferrer"
                 aria-label="Telegram"
               >
-                <PiTelegramLogoLight />
+                <PiTelegramLogoLight className={styles.icon} />
               </a>
             </li>
           </ul>

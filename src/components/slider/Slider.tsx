@@ -21,9 +21,10 @@ function usePrevious<T>(value: T): T | undefined {
 export const Slider = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const sliderRef = useRef<HTMLElement | null>(null)
-  const isDragging = useRef(false)
+  const isDragging = useRef<false | { startX: number }>(false)
+  const wasDraggedRecently = useRef(false)
 
-  const { active, setActive, goNext, goPrev } = useSliderNavigation({
+  const { active, setActive, goNext, goPrev, direction } = useSliderNavigation({
     length: slides.length,
     containerRef: sliderRef
   })
@@ -41,7 +42,7 @@ export const Slider = () => {
         role="region"
         tabIndex={0}
         onClick={() => {
-          if (isDragging.current) return
+          if (wasDraggedRecently.current) return
           setModalOpen(true)
         }}
         onKeyDown={(e) => {
@@ -68,7 +69,9 @@ export const Slider = () => {
                   <MediaDots activeIndex={active} total={slides.length} />
                 </div>
                 <figcaption className={styles.caption}>
-                  <h3>{slides[prevActive].title.toUpperCase()}</h3>
+                  <p className={styles.captionText}>
+                    {slides[prevActive].title.toUpperCase()}
+                  </p>
                 </figcaption>
               </figure>
             )}
@@ -76,33 +79,45 @@ export const Slider = () => {
             <motion.figure
               key={`motion-${active}`}
               className={styles.slide}
-              initial={{ x: "100%" }}
+              initial={{ x: direction > 0 ? "100%" : "-100%" }}
               animate={{ x: 0 }}
-              exit={{}}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
+              exit={{ x: direction > 0 ? "-100%" : "100%" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               style={{
                 zIndex: 2,
                 cursor: "grab",
                 pointerEvents: "auto"
               }}
-              drag="x"
-              dragElastic={0.2}
-              dragSnapToOrigin
-              onDragStart={() => {
-                isDragging.current = true
+              onPointerDown={(e) => {
+                isDragging.current = { startX: e.clientX }
               }}
-              onDragEnd={(_, info) => {
-                const swipePower = Math.abs(info.offset.x) * info.velocity.x
+              onPointerMove={(e) => {
+                if (
+                  !isDragging.current ||
+                  typeof isDragging.current === "boolean"
+                )
+                  return
+                const deltaX = e.clientX - isDragging.current.startX
+                const threshold = 80
 
-                if (swipePower < -1000) {
+                if (deltaX < -threshold) {
                   goNext()
-                } else if (swipePower > 1000) {
-                  goPrev()
-                }
-
-                setTimeout(() => {
                   isDragging.current = false
-                }, 50)
+                  wasDraggedRecently.current = true
+                  setTimeout(() => {
+                    wasDraggedRecently.current = false
+                  }, 200)
+                } else if (deltaX > threshold) {
+                  goPrev()
+                  isDragging.current = false
+                  wasDraggedRecently.current = true
+                  setTimeout(() => {
+                    wasDraggedRecently.current = false
+                  }, 200)
+                }
+              }}
+              onPointerUp={() => {
+                isDragging.current = false
               }}
             >
               <div className={styles.imageWrapper}>
@@ -116,14 +131,16 @@ export const Slider = () => {
                 />
               </div>
 
-              <motion.figcaption
-                className={styles.caption}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-              >
-                <h3>{current.title.toUpperCase()}</h3>
-              </motion.figcaption>
+              <figcaption className={styles.caption}>
+                <motion.p
+                  className={styles.captionText}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
+                >
+                  {current.title.toUpperCase()}
+                </motion.p>
+              </figcaption>
             </motion.figure>
           </AnimatePresence>
         )}
