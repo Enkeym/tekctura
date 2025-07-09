@@ -32,6 +32,19 @@ export const Slider = () => {
   const current = slides[active]
   const preview = current.media[0]
   const prevActive = usePrevious(active)
+  const totalSlides = slides.length
+  const isJump =
+    prevActive !== undefined &&
+    Math.abs(active - prevActive) !== 1 &&
+    !(active === 0 && prevActive === totalSlides - 1) &&
+    !(active === totalSlides - 1 && prevActive === 0)
+
+  const blockNextInteraction = (delay = 300) => {
+    wasDraggedRecently.current = true
+    setTimeout(() => {
+      wasDraggedRecently.current = false
+    }, delay)
+  }
 
   return (
     <>
@@ -50,100 +63,128 @@ export const Slider = () => {
           if (e.key === "ArrowRight") goNext()
           if (e.key === "ArrowLeft") goPrev()
         }}
+        onWheel={(e) => {
+          if (wasDraggedRecently.current) return
+          const delta = e.deltaY
+          if (delta > 20) {
+            goNext()
+            blockNextInteraction()
+          } else if (delta < -20) {
+            goPrev()
+            blockNextInteraction()
+          }
+        }}
       >
-        {!modalOpen && (
-          <AnimatePresence mode="sync" initial={false}>
-            {typeof prevActive === "number" && prevActive !== active && (
-              <figure
-                className={styles.slide}
-                key={`prev-${prevActive}`}
-                style={{ zIndex: 1 }}
-              >
-                <div className={styles.imageWrapper}>
-                  <MediaRenderer
-                    kind={slides[prevActive].media[0].kind}
-                    src={slides[prevActive].media[0].src}
-                    alt={slides[prevActive].title}
-                    className={styles.media}
-                  />
-                  <MediaDots activeIndex={active} total={slides.length} />
-                </div>
-                <figcaption className={styles.caption}>
-                  <p className={styles.captionText}>
-                    {slides[prevActive].title.toUpperCase()}
-                  </p>
-                </figcaption>
-              </figure>
-            )}
-
-            <motion.figure
-              key={`motion-${active}`}
-              className={styles.slide}
-              initial={{ x: direction > 0 ? "100%" : "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: direction > 0 ? "-100%" : "100%" }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              style={{
-                zIndex: 2,
-                cursor: "grab",
-                pointerEvents: "auto"
-              }}
-              onPointerDown={(e) => {
-                isDragging.current = { startX: e.clientX }
-              }}
-              onPointerMove={(e) => {
-                if (
-                  !isDragging.current ||
-                  typeof isDragging.current === "boolean"
-                )
-                  return
-                const deltaX = e.clientX - isDragging.current.startX
-                const threshold = 80
-
-                if (deltaX < -threshold) {
-                  goNext()
-                  isDragging.current = false
-                  wasDraggedRecently.current = true
-                  setTimeout(() => {
-                    wasDraggedRecently.current = false
-                  }, 200)
-                } else if (deltaX > threshold) {
-                  goPrev()
-                  isDragging.current = false
-                  wasDraggedRecently.current = true
-                  setTimeout(() => {
-                    wasDraggedRecently.current = false
-                  }, 200)
-                }
-              }}
-              onPointerUp={() => {
-                isDragging.current = false
-              }}
-            >
-              <div className={styles.imageWrapper}>
-                <MediaRenderer
-                  key={`${preview.src}-${active}`}
-                  kind={preview.kind}
-                  src={preview.src}
-                  alt={current.title}
-                  className={styles.media}
-                  priority={active === 0}
-                />
-              </div>
-
-              <figcaption className={styles.caption}>
-                <motion.p
-                  className={styles.captionText}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-                >
-                  {current.title.toUpperCase()}
-                </motion.p>
-              </figcaption>
-            </motion.figure>
-          </AnimatePresence>
+        {/* Предыдущий слайд */}
+        {typeof prevActive === "number" && (
+          <figure
+            className={styles.slide}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 1
+            }}
+          >
+            <div className={styles.imageWrapper}>
+              <MediaRenderer
+                kind={slides[prevActive].media[0].kind}
+                src={slides[prevActive].media[0].src}
+                alt={slides[prevActive].title}
+                className={styles.media}
+              />
+            </div>
+          </figure>
         )}
+
+        {/* Текущий слайд */}
+        <AnimatePresence mode="popLayout">
+          <motion.figure
+            key={active}
+            className={styles.slide}
+            custom={direction}
+            initial={
+              isJump
+                ? { opacity: 0, scale: 0.98 }
+                : { x: direction > 0 ? "100%" : "-100%", opacity: 0 }
+            }
+            animate={isJump ? { opacity: 1, scale: 1 } : { x: 0, opacity: 1 }}
+            exit={
+              isJump
+                ? { opacity: 0, scale: 0.98 }
+                : { x: direction > 0 ? "-100%" : "100%", opacity: 0 }
+            }
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            style={{
+              zIndex: 2,
+              cursor: "grab",
+              pointerEvents: "auto",
+              position: "relative"
+            }}
+            onPointerDown={(e) => {
+              isDragging.current = { startX: e.clientX }
+            }}
+            onPointerMove={(e) => {
+              if (
+                !isDragging.current ||
+                typeof isDragging.current === "boolean"
+              )
+                return
+              const deltaX = e.clientX - isDragging.current.startX
+              const threshold = 80
+
+              if (deltaX < -threshold) {
+                goNext()
+                isDragging.current = false
+                blockNextInteraction()
+              } else if (deltaX > threshold) {
+                goPrev()
+                isDragging.current = false
+                blockNextInteraction()
+              }
+            }}
+            onPointerUp={() => {
+              isDragging.current = false
+            }}
+          >
+            <div className={styles.imageWrapper}>
+              <MediaRenderer
+                key={`${preview.src}-${active}`}
+                kind={preview.kind}
+                src={preview.src}
+                alt={current.title}
+                className={styles.media}
+                priority={active === 0}
+              />
+            </div>
+          </motion.figure>
+        </AnimatePresence>
+
+        {/* Заголовок теперь отдельно и срабатывает AnimatePresence */}
+        <figcaption className={styles.caption}>
+          <AnimatePresence mode="sync">
+            {current && (
+              <motion.p
+                key={`caption-${active}`}
+                className={styles.captionText}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                  opacity: { duration: 0.3 },
+                  y: { duration: 0.8 }
+                }}
+              >
+                {current.title.toUpperCase()}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </figcaption>
+
         <MediaDots activeIndex={active} total={slides.length} />
       </section>
 
